@@ -19,7 +19,7 @@ public class BubbleController : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        BlowThisWay(-(inputWorldPos - new Vector2(transform.position.x,transform.position.y)).normalized * 3f);
+        BlowThisWay(-(inputWorldPos - new Vector2(transform.position.x,transform.position.y)).normalized * 15f);
         AirDrag();
     }
     void BlowThisWay(Vector2 dir)
