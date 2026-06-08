@@ -1,0 +1,94 @@
+using System;
+using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEngine;
+
+public class EnemyPool : MonoBehaviour
+{
+    [SerializeField]
+    public ObstacleData obsData;
+
+
+    private Dictionary<GameObject, Queue<GameObject>> poolDictionary = new Dictionary<GameObject, Queue<GameObject>>();
+
+
+
+
+    void Start()
+    {
+        // Initialiser un pool pour chaque type d'ennemi avec des quantités spécifiques
+        for (int i = 0; i < obsData.obsTypes.Count; i++)
+        {
+            var enemyType = obsData.obsTypes[i];
+
+
+            if (poolDictionary.ContainsKey(enemyType.prefab))
+            {
+                Debug.LogWarning($"Le prefab {enemyType.prefab.name} pour le type {enemyType.name} est déjà dans le pool");
+                continue;
+            }
+
+            int poolSize = GetPoolSizeForEnemyType(i);
+
+            Queue<GameObject> enemyQueue = new Queue<GameObject>();
+
+            for (int j = 0; j < poolSize; j++)
+            {
+                GameObject enemy = Instantiate(enemyType.prefab);
+                enemy.transform.name = enemyType.prefab.name;
+                enemy.SetActive(false);
+                enemyQueue.Enqueue(enemy);
+            }
+
+            poolDictionary.Add(enemyType.prefab, enemyQueue);
+        }
+    }
+
+    public GameObject GetEnemy(GameObject prefab)
+    {
+        if (poolDictionary.TryGetValue(prefab, out Queue<GameObject> enemyQueue) && enemyQueue.Count > 0)
+        {
+            GameObject enemy = enemyQueue.Dequeue();
+            enemy.SetActive(true);
+
+            return enemy;
+        }
+
+        return null;
+    }
+
+    public void ReturnToPool(GameObject enemy, GameObject prefab)
+    {
+        // TODO : A debugguer
+        enemy.SetActive(false);
+
+        if (poolDictionary.TryGetValue(prefab, out var enemyQueue))
+        {
+            enemyQueue.Enqueue(enemy);
+        }
+        else
+        {
+            Debug.Log("Tentative de retourner un ennemi à un pool inexistant !");
+        }
+    }
+
+    public List<ObstacleData.ObstacleType> GetEnemyType()
+    {
+        return obsData.obsTypes;
+    }
+
+    private int GetPoolSizeForEnemyType(int index)
+    {
+        switch (index)
+        {
+            case 0: // Type A
+                return 22;
+            case 1: // Type B
+                return 22;
+            case 2: // Type C
+                return 11;
+            default:
+                return 0;
+        }
+    }
+}
