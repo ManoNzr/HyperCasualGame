@@ -1,13 +1,15 @@
 using UnityEngine;
-
+using UnityEngine.InputSystem;
 public class BubbleController : MonoBehaviour
 {
     [SerializeField] float dragMultiplier;
     [SerializeField] float maxSpeed;
+    [SerializeField] float windForce;
     [SerializeField] Vector2 velocity;
     Rigidbody2D rb;
 
     [SerializeField] Vector2 inputWorldPos;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -19,7 +21,11 @@ public class BubbleController : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        BlowThisWay(-(inputWorldPos - new Vector2(transform.position.x,transform.position.y)).normalized * 15f);
+        /* if (Input.GetMouseButton(0))
+         { 
+             BlowThisWay(-(inputWorldPos - new Vector2(transform.position.x, transform.position.y)).normalized * 15f);
+         }*/
+        BlowThisWay(JoyStick.instance.inputWind * windForce);
         AirDrag();
     }
     void BlowThisWay(Vector2 dir)
