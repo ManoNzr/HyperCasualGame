@@ -4,7 +4,7 @@ using UnityEngine;
 public class UImanager : MonoBehaviour
 {
     
-    
+    [SerializeField] private GameObject volumeButton;
 
     void Start()
     {
@@ -22,6 +22,7 @@ public class UImanager : MonoBehaviour
         if (AudioListener.volume == 1)
         {
             AudioListener.volume = 0;
+            volumeButton.GetComponent<Spriterender>().fillamount = 0;
         }
         else
         {
