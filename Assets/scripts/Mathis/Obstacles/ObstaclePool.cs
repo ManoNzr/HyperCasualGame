@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class EnemyPool : MonoBehaviour
+public class ObstaclePool : MonoBehaviour
 {
     [SerializeField]
     public ObstacleData obsData;
@@ -19,65 +19,65 @@ public class EnemyPool : MonoBehaviour
         // Initialiser un pool pour chaque type d'ennemi avec des quantités spécifiques
         for (int i = 0; i < obsData.obsTypes.Count; i++)
         {
-            var enemyType = obsData.obsTypes[i];
+            var obsType = obsData.obsTypes[i];
 
 
-            if (poolDictionary.ContainsKey(enemyType.prefab))
+            if (poolDictionary.ContainsKey(obsType.prefab))
             {
-                Debug.LogWarning($"Le prefab {enemyType.prefab.name} pour le type {enemyType.name} est déjà dans le pool");
+                Debug.LogWarning($"Le prefab {obsType.prefab.name} pour le type {obsType.name} est déjà dans le pool");
                 continue;
             }
 
-            int poolSize = GetPoolSizeForEnemyType(i);
+            int poolSize = GetPoolSizeForObstacleType(i);
 
-            Queue<GameObject> enemyQueue = new Queue<GameObject>();
+            Queue<GameObject> obsQueue = new Queue<GameObject>();
 
             for (int j = 0; j < poolSize; j++)
             {
-                GameObject enemy = Instantiate(enemyType.prefab);
-                enemy.transform.name = enemyType.prefab.name;
-                enemy.SetActive(false);
-                enemyQueue.Enqueue(enemy);
+                GameObject obstacle = Instantiate(obsType.prefab);
+                obstacle.transform.name = obsType.prefab.name;
+                obstacle.SetActive(false);
+                obsQueue.Enqueue(obstacle);
             }
 
-            poolDictionary.Add(enemyType.prefab, enemyQueue);
+            poolDictionary.Add(obsType.prefab, obsQueue);
         }
     }
 
-    public GameObject GetEnemy(GameObject prefab)
+    public GameObject GetObstacle(GameObject prefab)
     {
-        if (poolDictionary.TryGetValue(prefab, out Queue<GameObject> enemyQueue) && enemyQueue.Count > 0)
+        if (poolDictionary.TryGetValue(prefab, out Queue<GameObject> obsQueue) && obsQueue.Count > 0)
         {
-            GameObject enemy = enemyQueue.Dequeue();
-            enemy.SetActive(true);
+            GameObject obstacle = obsQueue.Dequeue();
+            obstacle.SetActive(true);
 
-            return enemy;
+            return obstacle;
         }
 
         return null;
     }
 
-    public void ReturnToPool(GameObject enemy, GameObject prefab)
+    public void ReturnToPool(GameObject obstacle, GameObject prefab)
     {
         // TODO : A debugguer
-        enemy.SetActive(false);
+        obstacle.SetActive(false);
 
-        if (poolDictionary.TryGetValue(prefab, out var enemyQueue))
+        if (poolDictionary.TryGetValue(prefab, out var obsQueue))
         {
-            enemyQueue.Enqueue(enemy);
+            obsQueue.Enqueue(obstacle);
         }
         else
         {
-            Debug.Log("Tentative de retourner un ennemi à un pool inexistant !");
+            Debug.Log("Tentative de retourner un obstacle à un pool inexistant !");
         }
     }
 
-    public List<ObstacleData.ObstacleType> GetEnemyType()
+    public List<ObstacleData.ObstacleType> GetObstacleType()
     {
         return obsData.obsTypes;
     }
 
-    private int GetPoolSizeForEnemyType(int index)
+    private int GetPoolSizeForObstacleType(int index)
     {
         switch (index)
         {
