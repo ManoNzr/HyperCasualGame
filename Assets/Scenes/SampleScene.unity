@@ -6437,8 +6437,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dragMultiplier: 0.98
-  maxSpeed: 10
+  maxSpeed: 15
   velocity: {x: 0, y: 0}
+  inputWorldPos: {x: 0, y: 0}
 --- !u!4 &2011193862
 Transform:
   m_ObjectHideFlags: 0
