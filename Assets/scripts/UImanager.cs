@@ -16,4 +16,17 @@ public class UImanager : MonoBehaviour
     {
         
     }
+
+    public void setSounds()
+    {
+        if (AudioListener.volume == 1)
+        {
+            AudioListener.volume = 0;
+        }
+        else
+        {
+            AudioListener.volume = 1;
+        }
+    }
+
 }
