@@ -2,15 +2,33 @@ using UnityEngine;
 
 public class BubbleController : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] float dragMultiplier;
+    [SerializeField] float maxSpeed;
+    [SerializeField] Vector2 velocity;
+    Rigidbody2D rb;
+
+    private void Awake()
     {
-        
+        rb = GetComponent<Rigidbody2D>();
+    }
+    private void FixedUpdate()
+    {
+        //Vector2 pointerPos
+        BlowThisWay(new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"))); //10 * Time.fixedDeltaTime,0));
+        AirDrag();
+    }
+    void BlowThisWay(Vector2 dir)
+    {
+        velocity += dir;
+        if (velocity.magnitude > maxSpeed)
+        {
+            velocity = velocity.normalized * maxSpeed;
+        }
+        rb.linearVelocity = velocity;
     }
 
-    // Update is called once per frame
-    void Update()
+    void AirDrag()
     {
-        
+        velocity *= dragMultiplier;
     }
 }
