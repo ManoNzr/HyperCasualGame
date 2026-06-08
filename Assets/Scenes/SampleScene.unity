@@ -257,8 +257,8 @@ Camera:
   m_GameObject: {fileID: 330585543}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -548,16 +548,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 701624990}
-  m_LocalRotation: {x: -0, y: -0, z: -0.05437003, w: 0.9985209}
+  m_LocalRotation: {x: -0, y: -0, z: -0.06745196, w: 0.99772257}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2026535605}
+  m_Father: {fileID: 1013607941}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -6.233}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 460, y: 873}
+  m_AnchoredPosition: {x: 524.1083, y: -2.737671}
   m_SizeDelta: {x: 1020, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &701624992
@@ -582,8 +582,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 2
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 90d18479b9941421a9a06b9bee0a296a, type: 2}
+  m_sharedMaterial: {fileID: -6549176324037993022, guid: 90d18479b9941421a9a06b9bee0a296a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -737,7 +737,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 701624991}
   m_Father: {fileID: 2026535605}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 1.502}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -767,8 +768,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Blowbble
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 90d18479b9941421a9a06b9bee0a296a, type: 2}
+  m_sharedMaterial: {fileID: -6549176324037993022, guid: 90d18479b9941421a9a06b9bee0a296a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -904,8 +905,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: TAP TO START
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 90d18479b9941421a9a06b9bee0a296a, type: 2}
+  m_sharedMaterial: {fileID: -6549176324037993022, guid: 90d18479b9941421a9a06b9bee0a296a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1306,7 +1307,7 @@ GameObject:
   - component: {fileID: 2026535607}
   - component: {fileID: 2026535606}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: menuPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1326,7 +1327,6 @@ RectTransform:
   m_Children:
   - {fileID: 1070937277}
   - {fileID: 1013607941}
-  - {fileID: 701624991}
   m_Father: {fileID: 305426877}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
