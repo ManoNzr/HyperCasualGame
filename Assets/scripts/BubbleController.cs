@@ -7,19 +7,24 @@ public class BubbleController : MonoBehaviour
     [SerializeField] Vector2 velocity;
     Rigidbody2D rb;
 
+    [SerializeField] Vector2 inputWorldPos;
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
     }
+
+    private void Update()
+    {
+        GetInput();
+    }
     private void FixedUpdate()
     {
-        //Vector2 pointerPos
-        BlowThisWay(new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"))); //10 * Time.fixedDeltaTime,0));
+        BlowThisWay(-(inputWorldPos - new Vector2(transform.position.x,transform.position.y)).normalized * 3f);
         AirDrag();
     }
     void BlowThisWay(Vector2 dir)
     {
-        velocity += dir;
+        velocity += dir * Time.fixedDeltaTime;
         if (velocity.magnitude > maxSpeed)
         {
             velocity = velocity.normalized * maxSpeed;
@@ -30,5 +35,14 @@ public class BubbleController : MonoBehaviour
     void AirDrag()
     {
         velocity *= dragMultiplier;
+    }    
+
+    void GetInput()
+    {
+        if (Input.GetMouseButton(0))
+        {            
+            Vector3 mousePos = Input.mousePosition;
+            inputWorldPos = Camera.main.ScreenToWorldPoint(new Vector3 (mousePos.x, mousePos.y, 10f));
+        }
     }
 }
