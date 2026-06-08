@@ -7,15 +7,21 @@ public class UImanager : MonoBehaviour
     
     [SerializeField] private GameObject volumeButton;
 
-    void Start()
+    public void setPause()
     {
-    
+        if (Time.timeScale == 1)
+        {
+            Time.timeScale = 0;
+        }
+        else
+        {
+            Time.timeScale = 1;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void setActive(GameObject obj, bool active)
     {
-        
+        obj.SetActive(active);
     }
 
     public void setSounds()
