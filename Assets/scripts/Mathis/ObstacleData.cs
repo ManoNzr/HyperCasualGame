@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "ObstacleCfg", menuName = "Blowbble2/ObstacleConfiguration")]
+[CreateAssetMenu(fileName = "ObsCfg", menuName = "Blowbble2/ObstacleConfiguration")]
 
 public class ObstacleData : ScriptableObject
 {
@@ -11,8 +11,7 @@ public class ObstacleData : ScriptableObject
         public string name;
         public Color color;
         public float spacing;
-
-        public bool canCenter;
+        public float spawnRate;
         public GameObject prefab;
     }
 
