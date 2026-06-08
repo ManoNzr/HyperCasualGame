@@ -1,5 +1,6 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UImanager : MonoBehaviour
 {
@@ -22,11 +23,12 @@ public class UImanager : MonoBehaviour
         if (AudioListener.volume == 1)
         {
             AudioListener.volume = 0;
-            volumeButton.GetComponent<Spriterender>().fillamount = 0;
+            volumeButton.GetComponent<Image>().fillAmount = 0.5f;
         }
         else
         {
             AudioListener.volume = 1;
+            volumeButton.GetComponent<Image>().fillAmount = 1;
         }
     }
 
