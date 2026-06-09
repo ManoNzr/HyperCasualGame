@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using static ObstacleData;
+using static UnityEngine.GraphicsBuffer;
 
 public class ObstacleManager : MonoBehaviour
 {
@@ -48,7 +49,7 @@ public class ObstacleManager : MonoBehaviour
         if (!hasStarted) return;
 
         SpawnHigher();
-   
+        ReturnObstacleToPool();
 
     }
 
@@ -56,34 +57,97 @@ public class ObstacleManager : MonoBehaviour
     {
         if(player.transform.position.y +  spawnAheadDistance > nextSpawnY)
         {
-            SpawnObstacle();
+            SpawnObstacle(nextSpawnY);
         }
 
         nextSpawnY += inbetweenSpacing;
     }
 
-    public void SpawnObstacle()
+    public void SpawnObstacle(float targetY)
     {
         ObstacleData.ObstacleType obsType = GetRandomObsType();
 
         GameObject obstacle = obsPool.GetObstacle(obsType.prefab);
 
+        if(obstacle != null)
+        {
+            // Calcul de la position horizontale en fonction de 'isCentered'
+            float spawnX = 0f;
+            if (!obsType.isCentered)
+            {
+                spawnX = UnityEngine.Random.Range(-playerBoundaryX, playerBoundaryX);
+            }
+
+            obstacle.transform.position = new Vector3(spawnX, targetY, 0f);
+
+            // Gestion du canSpin
+            if (obsType.canSpin)
+            {
+                obstacle.transform.rotation = Quaternion.Euler(0f, 0f, UnityEngine.Random.Range(0f, 360f));
+            }
+            else
+            {
+                obstacle.transform.rotation = Quaternion.identity;
+            }
+
+            activeObstacles.Add(obstacle);
+        }
 
     }
 
 
-    public void ReturnObstacle(GameObject obstacle, GameObject prefab)
+    private void ReturnObstacleToPool()
     {
+        // Seuil en dessous duquel un obstacle est considéré comme invisible et dépassé
+        float threshold = player.transform.position.y - 10f;
 
 
-        
+        for (int i = activeObstacles.Count - 1; i >= 0; i--)
+        {
+            GameObject obs = activeObstacles[i];
 
-        obsPool.ReturnToPool(obstacle, prefab);
+            if (obs != null)
+            {
+                // Si l'obstacle est descendu trop bas par rapport à la bulle, on le recycle
+                if (obs.transform.position.y < threshold)
+                {
+                    activeObstacles.RemoveAt(i);
+
+                    // Retrouver le prefab d'origine pour appeler ton ReturnToPool
+                    GameObject originalPrefab = InstanceToPrefab(obs.name);
+                    if (originalPrefab != null)
+                    {
+                        obsPool.ReturnToPool(obs, originalPrefab);
+                    }
+                    else
+                    {
+                        obs.SetActive(false); // Sécurité si le prefab n'est pas retrouvé
+                    }
+                }
+            }
+        }
+    }
 
 
-
-
-
+    public void ClearObstacles()
+    {
+        for (int i = activeObstacles.Count - 1; i >= 0; i--)
+        {
+            GameObject obs = activeObstacles[i];
+            if (obs != null)
+            {
+                GameObject originalPrefab = InstanceToPrefab(obs.name);
+                if (originalPrefab != null)
+                {
+                    obsPool.ReturnToPool(obs, originalPrefab);
+                }
+                else
+                {
+                    obs.SetActive(false);
+                }
+            }
+        }
+        activeObstacles.Clear();
     }
 
 
