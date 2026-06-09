@@ -1,13 +1,16 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public abstract class ObstacleScript : MonoBehaviour
 {
     [SerializeField] protected float speed;
     protected string dir;
+    protected ObstaclePool obsPool;
 
-    private void Awake()
+    public void Setup(string direction, float vitesseComportement)
     {
-        speed = Random.Range(30, 60);
+        this.dir = direction;
+        this.speed = vitesseComportement;
     }
 
     protected abstract void MoveObstacle();

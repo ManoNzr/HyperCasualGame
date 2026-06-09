@@ -142,6 +142,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4113988532895384222}
+  - component: {fileID: 6150309857641342583}
   m_Layer: 6
   m_Name: Type0
   m_TagString: bounceTag
@@ -165,3 +166,16 @@ Transform:
   - {fileID: 7520450245888051195}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6150309857641342583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8500758818596378122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1368e0422cf49e344bb313d08cf14d18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 3

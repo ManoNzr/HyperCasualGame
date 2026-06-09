@@ -17,6 +17,8 @@ public class ObstacleManager : MonoBehaviour
     [SerializeField] private float spawnAheadDistance = 15f;    // Distance au-dessus du joueur où spawner
     [SerializeField] private float inbetweenSpacing = 5f; // Distance verticale fixe entre chaque obstacle
     [SerializeField] private bool hasStarted = false;
+    [SerializeField] private bool mustGenerate = true;
+    [SerializeField]private int returnedObstacles;
 
     private float playerBoundaryX;
     private float nextSpawnY;
@@ -24,8 +26,6 @@ public class ObstacleManager : MonoBehaviour
 
     private List<GameObject> activeObstacles = new List<GameObject>();
     private int limit = 30;
-    private int returnedObstacles;
-    [SerializeField] private bool mustGenerate = true;
 
 
 
@@ -83,6 +83,8 @@ public class ObstacleManager : MonoBehaviour
 
             obstacle.transform.position = new Vector3(spawnX, targetY, 0f);
 
+            ObstacleScript obstacleScript = obstacle.GetComponent<ObstacleScript>();
+            if (obstacleScript != null) obstacleScript.Setup(obsType.dir,UnityEngine.Random.Range(30,60));
 
             activeObstacles.Add(obstacle);
         }
@@ -117,10 +119,10 @@ public class ObstacleManager : MonoBehaviour
                     {
                         obs.SetActive(false); // Sécurité si le prefab n'est pas retrouvé
                     }
+                    returnedObstacles++;
                 }
             }
         }
-        returnedObstacles++;
         if(returnedObstacles >= limit) mustGenerate = false;
     }
 
