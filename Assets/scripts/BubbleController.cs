@@ -19,6 +19,9 @@ public class BubbleController : MonoBehaviour
     [Header("Visuals")]
     [SerializeField] GameObject popticles;
     [SerializeField] GameObject windBlow;
+
+    [Header("Camera")]
+    [SerializeField] GameObject camera;
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -36,6 +39,7 @@ public class BubbleController : MonoBehaviour
                 firstInput = true;
             }
         }
+        camera.transform.position = new Vector3(0,transform.position.y,-10f);
     }
     private void FixedUpdate()
     {
