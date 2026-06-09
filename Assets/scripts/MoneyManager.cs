@@ -24,6 +24,8 @@ public class MoneyManager : MonoBehaviour
         if (money >= amount)
         {
             money -= amount;
+            PlayerPrefs.SetInt("money", money);
+            PlayerPrefs.Save();
             return true;
         }
         return false;
