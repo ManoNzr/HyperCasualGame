@@ -884,6 +884,7 @@ GameObject:
   - component: {fileID: 355652038}
   - component: {fileID: 355652037}
   - component: {fileID: 355652039}
+  - component: {fileID: 355652040}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -930,17 +931,32 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 355652036}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 68c97c5f1f64f6a418fd7551af85008e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 2011193860}
-  obstacleData: {fileID: 11400000, guid: 824696b3ea3646e4c8bb011cca2cb4ad, type: 2}
-  obsPool: {fileID: 699021362}
-  spawnAheadDistance: 15
-  inbetweenSpacing: 10
+  enemyData: {fileID: 11400000, guid: 824696b3ea3646e4c8bb011cca2cb4ad, type: 2}
+  spawnAheadDist: 0
   hasStarted: 0
+  obsPool: {fileID: 699021362}
+  rows: 5
+  columns: 11
+  spacing: 1.5
+  startPosition: {x: -7.5, y: 6}
+--- !u!114 &355652040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 355652036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff65446baaea1c340adf791ceabd2c39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &377966227
 GameObject:
   m_ObjectHideFlags: 0
@@ -1370,7 +1386,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 699021361}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 912be420684d6ce478c762c5297a6bab, type: 3}
   m_Name: 

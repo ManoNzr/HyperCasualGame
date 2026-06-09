@@ -14,6 +14,7 @@ public class BubbleController : MonoBehaviour
     [Header("Layers")]
     [SerializeField] LayerMask dangerLayer;
     [SerializeField] LayerMask bounceLayer;
+    [SerializeField] LayerMask moneyLayer;
 
     [Header("Visuals")]
     [SerializeField] GameObject popticles;
@@ -93,6 +94,10 @@ public class BubbleController : MonoBehaviour
         else if (collision.gameObject.layer == bounceLayer)
         {
             BounceThisWay(collision.contacts[0].point - new Vector2(transform.position.x, transform.position.y));
+        }
+        else if (collision.gameObject.layer == moneyLayer)
+        {
+            MoneyManager.instance.AddCoin();
         }
     }
 }
