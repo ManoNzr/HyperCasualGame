@@ -55,12 +55,12 @@ public class ObstacleManager : MonoBehaviour
 
     private void SpawnHigher()
     {
-        if(player.transform.position.y +  spawnAheadDistance > nextSpawnY)
+        if(player.transform.position.y +  spawnAheadDistance >= nextSpawnY)
         {
             SpawnObstacle(nextSpawnY);
+            nextSpawnY += inbetweenSpacing;
         }
 
-        nextSpawnY += inbetweenSpacing;
     }
 
     public void SpawnObstacle(float targetY)
@@ -90,7 +90,7 @@ public class ObstacleManager : MonoBehaviour
     private void ReturnObstacleToPool()
     {
         // Seuil en dessous duquel un obstacle est considéré comme invisible et dépassé
-        float threshold = player.transform.position.y - 10f;
+        float threshold = player.transform.position.y - 60f;
 
 
         for (int i = activeObstacles.Count - 1; i >= 0; i--)
