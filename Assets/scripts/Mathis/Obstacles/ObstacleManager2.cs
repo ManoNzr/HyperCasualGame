@@ -83,14 +83,7 @@ public class ObstacleManager2 : MonoBehaviour
             obstacle.transform.position = new Vector3(spawnX, targetY, 0f);
 
             // Gestion de la rotation autonome en fonction de ta variable 'canSpin'
-            if (selectedType.canSpin)
-            {
-                obstacle.transform.rotation = Quaternion.Euler(0f, 0f, Random.Range(0f, 360f));
-            }
-            else
-            {
-                obstacle.transform.rotation = Quaternion.identity;
-            }
+
 
             // --- Note sur ta variable 'selectedType.dir' ---
             // Si tes obstacles possèdent un script de comportement de mouvement (ex: patrouille), 
