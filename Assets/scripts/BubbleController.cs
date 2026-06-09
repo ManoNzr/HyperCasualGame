@@ -75,7 +75,7 @@ public class BubbleController : MonoBehaviour
 
     void PopBubble()
     {
-
+        popticles.SetActive(true);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
