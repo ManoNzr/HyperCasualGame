@@ -3,6 +3,7 @@ using TMPro;
 using System.Collections.Generic;
 public class MoneyManager : MonoBehaviour
 {
+    //  JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI
     public static MoneyManager instance;
     [SerializeField] TMP_Text text;
     int money;
@@ -31,6 +32,7 @@ public class MoneyManager : MonoBehaviour
         FindCollectableCoins();
     }
 
+    // cherche les pieces qui sont a portée et les rammasse
     void FindCollectableCoins()
     {
         for (int i = 0; i < activeCoins.Count; i++)
@@ -45,6 +47,8 @@ public class MoneyManager : MonoBehaviour
             }
         }
     }
+
+    // crée des pieces ( pour tester )
     void CreateCoins()
     {
         for (int i = 0;i < coinsInLevel;i++)
@@ -52,6 +56,8 @@ public class MoneyManager : MonoBehaviour
             activeCoins.Add(Instantiate(coinPrefab, transform.position + new Vector3(0, i, 0), Quaternion.identity).transform);
         }
     }
+
+    // ajoute 1 piece au compteur de piece 
     public void AddCoin()
     {
         money++;
@@ -59,6 +65,8 @@ public class MoneyManager : MonoBehaviour
         PlayerPrefs.Save();
         text.text = money.ToString();
     }
+
+    // dépense le nombre de piece si c'est possible et retourne vrai sinon il retourne faux pour savoir si l'achat est accepté ou pas
     public bool SpendCoin(int amount)
     {
         if (money >= amount)

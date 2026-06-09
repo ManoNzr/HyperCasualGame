@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class JoyStick : MonoBehaviour
 {
+    //  JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI
     public static JoyStick instance;
     [SerializeField] Transform head;
     [SerializeField] float maxHeadDistance;
@@ -22,7 +23,7 @@ public class JoyStick : MonoBehaviour
         // si on touche l'ecran
         if (Input.GetMouseButton(0))
         {
-            // la head vas toujours ou on touche
+            // la head vas toujours là ou on touche
             head.position = Input.mousePosition;
 
             // faire que le core suit le head si il est plus loin que maxHeadDistance
