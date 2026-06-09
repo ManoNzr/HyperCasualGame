@@ -4,23 +4,26 @@ using Unity.VisualScripting;
 using UnityEngine;
 using static ObstacleData;
 
-public class EnemyManager : MonoBehaviour
+public class ObstacleManager : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject player;
+    [SerializeField] private GameObject player;
     private float playerBoundaryX;
+    private float playerBoundaryY;
 
     [SerializeField] ObstacleData enemyData;
+
+    [SerializeField] private float spawnAheadDist;
+
+    [SerializeField] private bool hasStarted = false;
 
 
     public ObstaclePool obsPool;
     public int rows = 5; // Nb de rangées
     public int columns = 11; // Nb de colonnes
-    public float spacing = 1.5f; // Espacement entre les ennemies
-    public float _stepDistance = 0.5f; // Distance de déplacement par frame
-    public float _stepDistanceVertical = 1f; // Distance de déplacement vertical par frame
+    public float spacing = 1.5f; // Espacement entre les obstacle et la boundaryX
 
-    public Vector2 startPosition = new Vector2(-7.5f, 6f);
+
+    [SerializeField] private Vector2 startPosition = new Vector2(-7.5f, 6f);
 
 
     private GameObject[,] obstacles;
@@ -31,10 +34,11 @@ public class EnemyManager : MonoBehaviour
     void Start()
     {
 
-        //playerBoundaryX = player.GetComponent<BubbleController>().boundary;
+        playerBoundaryY = player.GetComponent<BubbleBoundary>().BoundaryY;
         obstacles = new GameObject[rows, columns];
 
-        SpawnObstacles();
+        
+
 
 
 
@@ -42,7 +46,10 @@ public class EnemyManager : MonoBehaviour
     }
     private void Update()
     {
-
+        if (hasStarted)
+        {
+            SpawnObstacles();
+        }
 
     }
 
@@ -52,8 +59,11 @@ public class EnemyManager : MonoBehaviour
     {
         var obsTypes = obsPool.GetObstacleType();
 
-
-
+        for(int i = 0; i <= obsTypes.Count; i++)
+        {
+            var obsType = obsTypes[i];
+        }
+        /*
         for (int row = 0; row < rows; row++)
         {
             var obsType = GetObstacleTypeForRow(row, obsTypes);
@@ -67,22 +77,21 @@ public class EnemyManager : MonoBehaviour
                     float xPos = startPosition.x + (col * spacing);
                     float yPos = startPosition.y - (row * spacing);
 
-                    //   Debug.Log($"[EnemyManager] {enemy.name} est à la position X : {xPos}; Y : {yPos}");
 
                     obstacle.transform.position = new Vector3(xPos, yPos, 0);
 
-                    /*
+                    
                     if (enemyScript != null)
                     {
                         enemyScript.EnemyType = obsType;
-                        enemyScript.ScoreData = obsType.points;
-                    }*/
+
+                    }
                     obstacles[row, col] = obstacle;
 
                 }
             }
 
-        }
+        }*/
 
 
     }
@@ -163,20 +172,11 @@ public class EnemyManager : MonoBehaviour
     }
     */
 
-    private ObstacleData.ObstacleType GetObstacleTypeForRow(int row, List<ObstacleData.ObstacleType> obsTypes)
+    private ObstacleData.ObstacleType GetRandomObsType(GameObject obstacle)
     {
-        if (row == 0) // 1er ligne : Type C
-        {
-            return obsTypes[2];
-        }
-        else if (row <= 2) // 2e et 3e lignes : Type B
-        {
-            return obsTypes[1];
+        float rand = UnityEngine.Random.Range(0f, 1f);
+        if (rand == obstacle.GetComponent<ObstacleData.ObstacleType>().spawnRate) return obstacle.GetComponent<ObstacleData.ObstacleType>();
+        return null;
 
-        }
-        else // 4e et 5e lignes : Type A
-        {
-            return obsTypes[0];
-        }
     }
 }
