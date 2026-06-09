@@ -80,15 +80,6 @@ public class ObstacleManager : MonoBehaviour
 
             obstacle.transform.position = new Vector3(spawnX, targetY, 0f);
 
-            // Gestion du canSpin
-            if (obsType.canSpin)
-            {
-                obstacle.transform.rotation = Quaternion.Euler(0f, 0f, UnityEngine.Random.Range(0f, 360f));
-            }
-            else
-            {
-                obstacle.transform.rotation = Quaternion.identity;
-            }
 
             activeObstacles.Add(obstacle);
         }
