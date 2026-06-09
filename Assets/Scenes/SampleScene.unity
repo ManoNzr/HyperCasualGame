@@ -929,19 +929,19 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 355652036}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 68c97c5f1f64f6a418fd7551af85008e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 2011193860}
   enemyData: {fileID: 11400000, guid: 824696b3ea3646e4c8bb011cca2cb4ad, type: 2}
+  spawnAheadDist: 0
+  hasStarted: 0
   obsPool: {fileID: 699021362}
   rows: 5
   columns: 11
   spacing: 1.5
-  _stepDistance: 0.5
-  _stepDistanceVertical: 1
   startPosition: {x: -7.5, y: 6}
 --- !u!1 &377966227
 GameObject:
@@ -1372,7 +1372,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 699021361}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 912be420684d6ce478c762c5297a6bab, type: 3}
   m_Name: 
@@ -13113,7 +13113,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2c28631b621f5b4ca794304c84654ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boundary: 0
+  boundaryX: 0
+  boundaryY: 0
   boundaryPercentage: 0.45
 --- !u!1 &2014825297
 GameObject:
