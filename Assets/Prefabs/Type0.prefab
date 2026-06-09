@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 9151296084250450174}
   m_Layer: 6
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: bounceTag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -144,7 +144,7 @@ GameObject:
   - component: {fileID: 4113988532895384222}
   m_Layer: 6
   m_Name: Type0
-  m_TagString: Untagged
+  m_TagString: bounceTag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
