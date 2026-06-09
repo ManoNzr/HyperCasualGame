@@ -1,32 +1,28 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using static ObstacleData;
+using static UnityEngine.GraphicsBuffer;
 
 public class ObstacleManager : MonoBehaviour
 {
-    [SerializeField] private GameObject player;
-    private float playerBoundaryX;
-    private float playerBoundaryY;
+    [Header("Références")]
+    [SerializeField] private GameObject player;          // Référence à la bulle
+    [SerializeField] private ObstacleData obstacleData; // Le ScriptableObject de configuration
+    [SerializeField] private ObstaclePool obsPool;      // Référence au pool d'obstacles
 
-    [SerializeField] ObstacleData enemyData;
-
-    [SerializeField] private float spawnAheadDist;
-
+    [Header("Paramètres de Génération")]
+    [SerializeField] private float spawnAheadDistance = 15f;    // Distance au-dessus du joueur où spawner
+    [SerializeField] private float inbetweenSpacing = 5f; // Distance verticale fixe entre chaque obstacle
     [SerializeField] private bool hasStarted = false;
 
-
-    public ObstaclePool obsPool;
-    public int rows = 5; // Nb de rangées
-    public int columns = 11; // Nb de colonnes
-    public float spacing = 1.5f; // Espacement entre les obstacle et la boundaryX
+    private float playerBoundaryX;
+    private float nextSpawnY;
 
 
-    [SerializeField] private Vector2 startPosition = new Vector2(-7.5f, 6f);
-
-
-    private GameObject[,] obstacles;
+    private List<GameObject> activeObstacles = new List<GameObject>();
 
 
 
@@ -34,149 +30,167 @@ public class ObstacleManager : MonoBehaviour
     void Start()
     {
 
-        playerBoundaryY = player.GetComponent<BubbleBoundary>().BoundaryY;
-        obstacles = new GameObject[rows, columns];
+        var bubbleBoundary = player.GetComponent<BubbleBoundary>();
+        if (bubbleBoundary != null)
+        {
+            playerBoundaryX = bubbleBoundary.BoundaryX;
+        }
+        else
+        {
+            playerBoundaryX = 6f; // Valeur par défaut
+        }
 
-        
-
-
-
-
+  
+        nextSpawnY = player.transform.position.y + 5f;
 
     }
     private void Update()
     {
-        if (hasStarted)
+        if (!hasStarted) return;
+
+        SpawnHigher();
+        ReturnObstacleToPool();
+
+    }
+
+    private void SpawnHigher()
+    {
+        if(player.transform.position.y +  spawnAheadDistance > nextSpawnY)
         {
-            SpawnObstacles();
+            SpawnObstacle(nextSpawnY);
+        }
+
+        nextSpawnY += inbetweenSpacing;
+    }
+
+    public void SpawnObstacle(float targetY)
+    {
+        ObstacleData.ObstacleType obsType = GetRandomObsType();
+
+        GameObject obstacle = obsPool.GetObstacle(obsType.prefab);
+
+        if(obstacle != null)
+        {
+            // Calcul de la position horizontale en fonction de 'isCentered'
+            float spawnX = 0f;
+            if (!obsType.isCentered)
+            {
+                spawnX = UnityEngine.Random.Range(-playerBoundaryX, playerBoundaryX);
+            }
+
+            obstacle.transform.position = new Vector3(spawnX, targetY, 0f);
+
+            // Gestion du canSpin
+            if (obsType.canSpin)
+            {
+                obstacle.transform.rotation = Quaternion.Euler(0f, 0f, UnityEngine.Random.Range(0f, 360f));
+            }
+            else
+            {
+                obstacle.transform.rotation = Quaternion.identity;
+            }
+
+            activeObstacles.Add(obstacle);
         }
 
     }
 
 
-
-    public void SpawnObstacles()
+    private void ReturnObstacleToPool()
     {
-        var obsTypes = obsPool.GetObstacleType();
+        // Seuil en dessous duquel un obstacle est considéré comme invisible et dépassé
+        float threshold = player.transform.position.y - 10f;
 
-        for(int i = 0; i <= obsTypes.Count; i++)
-        {
-            var obsType = obsTypes[i];
-        }
-        /*
-        for (int row = 0; row < rows; row++)
-        {
-            var obsType = GetObstacleTypeForRow(row, obsTypes);
 
-            for (int col = 0; col < columns; col++)
+        for (int i = activeObstacles.Count - 1; i >= 0; i--)
+        {
+            GameObject obs = activeObstacles[i];
+
+            if (obs != null)
             {
-                GameObject obstacle = obsPool.GetObstacle(obsType.prefab);
-
-                if (obstacle != null)
+                // Si l'obstacle est descendu trop bas par rapport à la bulle, on le recycle
+                if (obs.transform.position.y < threshold)
                 {
-                    float xPos = startPosition.x + (col * spacing);
-                    float yPos = startPosition.y - (row * spacing);
+                    activeObstacles.RemoveAt(i);
 
-
-                    obstacle.transform.position = new Vector3(xPos, yPos, 0);
-
-                    
-                    if (enemyScript != null)
+                    // Retrouver le prefab d'origine pour appeler ton ReturnToPool
+                    GameObject originalPrefab = InstanceToPrefab(obs.name);
+                    if (originalPrefab != null)
                     {
-                        enemyScript.EnemyType = obsType;
-
+                        obsPool.ReturnToPool(obs, originalPrefab);
                     }
-                    obstacles[row, col] = obstacle;
-
+                    else
+                    {
+                        obs.SetActive(false); // Sécurité si le prefab n'est pas retrouvé
+                    }
                 }
             }
-
-        }*/
-
-
+        }
     }
 
 
-    private List<GameObject> GetBottomObstacles()
+    public void ClearObstacles()
     {
-        List<GameObject> bottomobstacles = new List<GameObject>();
-
-        for (int col = 0; col < columns; col++)
+        for (int i = activeObstacles.Count - 1; i >= 0; i--)
         {
-            for (int row = rows - 1; row >= 0; row--)
+            GameObject obs = activeObstacles[i];
+            if (obs != null)
             {
-                if (obstacles[row, col] != null && obstacles[row, col].activeSelf)
+                GameObject originalPrefab = InstanceToPrefab(obs.name);
+                if (originalPrefab != null)
                 {
-                    bottomobstacles.Add(obstacles[row, col]);
-                    break;
+                    obsPool.ReturnToPool(obs, originalPrefab);
+                }
+                else
+                {
+                    obs.SetActive(false);
                 }
             }
         }
-
-
-
-        return bottomobstacles;
+        activeObstacles.Clear();
     }
 
 
-
-    public void ReturnObstacle(GameObject obstacle, GameObject prefab)
+    private ObstacleData.ObstacleType GetRandomObsType()
     {
-        for (int row = 0; row < rows; row++)
-        {
+        var obsTypes = obstacleData.obsTypes;
+        if (obsTypes == null || obsTypes.Count == 0) return null;
 
-            for (int col = 0; col < columns; col++)
+        float totalRate = 0f;
+        foreach(var obsType in obsTypes)
+        {
+            totalRate += obsType.spawnRate;
+        }
+
+        float rand = UnityEngine.Random.Range(0, totalRate);
+
+
+        float currentRate = 0f;
+        foreach (var obsType in obsTypes)
+        {
+            currentRate += obsType.spawnRate;
+            if (rand <= currentRate)
             {
-
-                if (obstacles[row, col] == obstacle)
-                {
-                    obstacles[row, col] = null;
-                }
-
+                return obsType;
             }
-
-
         }
 
-        
-
-        obsPool.ReturnToPool(obstacle, prefab);
-
-
-
-
-
+        return obsTypes[0]; 
     }
 
-
-
-
-
-    /*private bool ReachedBoundary(GameObject obstacle)
+    private GameObject InstanceToPrefab(string instanceName)
     {
-        float xPos = obstacle.transform.position.x;
+        if (obstacleData == null || obstacleData.obsTypes == null) return null;
 
-        if (currentState == MoveState.MoveRight && xPos >= playerBoundaryX)
+        foreach (var type in obstacleData.obsTypes)
         {
-
-            return true;
+            if (type.prefab != null && type.prefab.name == instanceName)
+            {
+                return type.prefab;
+            }
         }
-        if (currentState == MoveState.MoveLeft && xPos <= -playerBoundaryX)
-        {
-
-            return true;
-        }
-
-        return false;
-
-    }
-    */
-
-    private ObstacleData.ObstacleType GetRandomObsType(GameObject obstacle)
-    {
-        float rand = UnityEngine.Random.Range(0f, 1f);
-        if (rand == obstacle.GetComponent<ObstacleData.ObstacleType>().spawnRate) return obstacle.GetComponent<ObstacleData.ObstacleType>();
         return null;
-
     }
+
 }
+
