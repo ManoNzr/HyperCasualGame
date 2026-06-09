@@ -7,10 +7,12 @@ public class MoneyManager : MonoBehaviour
     [SerializeField] TMP_Text text;
     int money;
     [SerializeField] GameObject coinPrefab;
-    List<Transform> activeCoins;
-    List<Transform> inactiveCoins;
+    List<Transform> activeCoins = new List<Transform>();
+    List<Transform> inactiveCoins = new List<Transform>();
     [SerializeField] int coinsInLevel;
     float collectRangeSqr;
+
+    [SerializeField] Transform player;
     private void Awake()
     {
         if (instance == null) instance = this;
@@ -21,24 +23,25 @@ public class MoneyManager : MonoBehaviour
         money = PlayerPrefs.GetInt("money", 0);
         text.text = money.ToString();
         CreateCoins();
-        collectRangeSqr = transform.localScale.x * transform.localScale.x;
+        collectRangeSqr = (transform.localScale.x * transform.localScale.x) * 15f;
     }
 
     private void FixedUpdate()
     {
-        
+        FindCollectableCoins();
     }
 
     void FindCollectableCoins()
     {
         for (int i = 0; i < activeCoins.Count; i++)
         {
-            if ((transform.position - activeCoins[i].position).sqrMagnitude < collectRangeSqr)
+            if ((player.position - activeCoins[i].position).sqrMagnitude < collectRangeSqr)
             {
                 Transform coin = activeCoins[i];
                 activeCoins.RemoveAt(i);
                 inactiveCoins.Add(coin);
                 coin.gameObject.SetActive(false);
+                AddCoin();
             }
         }
     }
@@ -46,7 +49,8 @@ public class MoneyManager : MonoBehaviour
     {
         for (int i = 0;i < coinsInLevel;i++)
         {
-            Instantiate(coinPrefab, transform.position + new Vector3(0, i, 0), Quaternion.identity);
+            activeCoins.Add(Instantiate(coinPrefab, transform.position + new Vector3(0, i, 0), Quaternion.identity).transform);
+
         }
     }
     public void AddCoin()

@@ -940,9 +940,9 @@ MonoBehaviour:
   player: {fileID: 2011193860}
   obstacleData: {fileID: 11400000, guid: 824696b3ea3646e4c8bb011cca2cb4ad, type: 2}
   obsPool: {fileID: 699021362}
-  spawnAheadDistance: 15
-  inbetweenSpacing: 10
-  hasStarted: 0
+  spawnAheadDistance: 50
+  inbetweenSpacing: 30
+  hasStarted: 1
 --- !u!114 &355652040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -958,6 +958,7 @@ MonoBehaviour:
   text: {fileID: 573613825}
   coinPrefab: {fileID: 4623298917124496419, guid: be5b0507e5a244af3a8705585c086a1f, type: 3}
   coinsInLevel: 100
+  player: {fileID: 2011193862}
 --- !u!1 &377966227
 GameObject:
   m_ObjectHideFlags: 0
@@ -13345,7 +13346,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boundaryX: 10
-  boundaryY: 0
   boundaryPercentage: 0.45
 --- !u!1 &2014825297
 GameObject:
