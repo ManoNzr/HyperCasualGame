@@ -23,6 +23,9 @@ public class ObstacleManager : MonoBehaviour
 
 
     private List<GameObject> activeObstacles = new List<GameObject>();
+    private int limit = 30;
+    private int returnedObstacles;
+    [SerializeField] private bool mustGenerate = true;
 
 
 
@@ -55,7 +58,7 @@ public class ObstacleManager : MonoBehaviour
 
     private void SpawnHigher()
     {
-        if(player.transform.position.y +  spawnAheadDistance >= nextSpawnY)
+        if(player.transform.position.y +  spawnAheadDistance >= nextSpawnY && mustGenerate)
         {
             SpawnObstacle(nextSpawnY);
             nextSpawnY += inbetweenSpacing;
@@ -117,6 +120,8 @@ public class ObstacleManager : MonoBehaviour
                 }
             }
         }
+        returnedObstacles++;
+        if(returnedObstacles >= limit) mustGenerate = false;
     }
 
 

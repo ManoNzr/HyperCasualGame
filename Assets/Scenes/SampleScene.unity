@@ -942,7 +942,8 @@ MonoBehaviour:
   obsPool: {fileID: 699021362}
   spawnAheadDistance: 50
   inbetweenSpacing: 30
-  hasStarted: 1
+  hasStarted: 0
+  mustGenerate: 0
 --- !u!114 &355652040
 MonoBehaviour:
   m_ObjectHideFlags: 0
