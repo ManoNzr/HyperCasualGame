@@ -13172,6 +13172,7 @@ MonoBehaviour:
     m_Bits: 0
   popticles: {fileID: 1565253866}
   windBlow: {fileID: 315336146}
+  camera: {fileID: 330585543}
 --- !u!4 &2011193862
 Transform:
   m_ObjectHideFlags: 0
