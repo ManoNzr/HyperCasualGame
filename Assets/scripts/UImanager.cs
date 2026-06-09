@@ -10,12 +10,21 @@ public class UImanager : MonoBehaviour
     [SerializeField] private float animationDuration = 0.5f; 
     [SerializeField] private float slideDistance = 1000f;
 
+    public static UImanager Instance { get; private set; }
+
     private Vector2 initialpos = Vector2.zero;
     private RectTransform mainMenuRect;
     private CanvasGroup labelCanvasGroup;
 
     private void Start()
     {
+
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+        }
+        Instance = this;
+
         mainMenuRect = MainMenu.GetComponent<RectTransform>();
         initialpos = mainMenuRect.anchoredPosition;
 
