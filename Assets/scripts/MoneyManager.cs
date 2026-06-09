@@ -13,13 +13,14 @@ public class MoneyManager : MonoBehaviour
     private void Start()
     {
         money = PlayerPrefs.GetInt("money", 0);
+        text.text = money.ToString();
     }
     public void AddCoin()
     {
         money++;
         PlayerPrefs.SetInt("money", money);
         PlayerPrefs.Save();
-        //text = money.ToString();
+        text.text = money.ToString();
     }
     public bool SpendCoin(int amount)
     {
@@ -28,6 +29,7 @@ public class MoneyManager : MonoBehaviour
             money -= amount;
             PlayerPrefs.SetInt("money", money);
             PlayerPrefs.Save();
+            text.text = money.ToString();
             return true;
         }
         return false;
