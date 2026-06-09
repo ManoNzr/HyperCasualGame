@@ -29,7 +29,7 @@ public class JoyStick : MonoBehaviour
             float headCoreDist = (head.position - transform.position).magnitude;
             if (headCoreDist > maxHeadDistance)
             {
-                transform.position = transform.position + (head.position - transform.position).normalized * maxHeadDistance / 2f;
+                transform.position = head.position + (transform.position - head.position).normalized * maxHeadDistance;
             }
             inputWind = -(head.position - transform.position).normalized;
         }

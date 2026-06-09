@@ -1,6 +1,7 @@
 using UnityEngine;
 public class BubbleController : MonoBehaviour
 {
+    bool firstInput;
     [Header("Physics")]
     [SerializeField] float dragMultiplier;
     [SerializeField] float maxSpeed;
@@ -28,6 +29,11 @@ public class BubbleController : MonoBehaviour
         if (JoyStick.instance.inputWind == Vector2.zero)
         {
             windBlow.SetActive(false);
+            if (!firstInput)
+            {
+                UImanager.Instance.StartGame();
+                firstInput = true;
+            }
         }
     }
     private void FixedUpdate()
