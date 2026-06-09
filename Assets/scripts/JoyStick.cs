@@ -5,17 +5,12 @@ public class JoyStick : MonoBehaviour
     public static JoyStick instance;
     [SerializeField] Transform head;
     [SerializeField] float maxHeadDistance;
-    float maxHeadDistanceSqr;
     public Vector2 inputWind;
 
     private void Awake()
     {
         if (instance == null) instance = this;
         else { Destroy(gameObject); }
-    }
-    private void Start()
-    {
-        maxHeadDistanceSqr = maxHeadDistance * maxHeadDistance;
     }
 
     private void Update()
@@ -24,19 +19,10 @@ public class JoyStick : MonoBehaviour
     }
     void GetInput()
     {
-        /* if (Input.GetMouseButtonDown(0))
-         {
-             float headCoreDist = (head.position - transform.position).magnitude;
-             if (headCoreDist > maxHeadDistance)
-             {
-                 head.position = inputWind;
-                // headCoreDist = (transform.position - head.position).magnitude;
-                 transform.position = (transform.position - head.position).normalized * maxHeadDistance;
-             }
-         }*/
-
+        // si on touche l'ecran
         if (Input.GetMouseButton(0))
         {
+            // la head vas toujours ou on touche
             head.position = Input.mousePosition;
 
             // faire que le core suit le head si il est plus loin que maxHeadDistance
@@ -47,9 +33,9 @@ public class JoyStick : MonoBehaviour
             }
             inputWind = -(head.position - transform.position).normalized;
         }
-        else
+        else // si on touche rien on fait rien
         {
-            inputWind = Vector3.zero;
+            inputWind = Vector2.zero;
         }
     }
 }
