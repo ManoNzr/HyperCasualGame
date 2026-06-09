@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3836901019191857418}
   m_Layer: 6
   m_Name: Type3
-  m_TagString: Untagged
+  m_TagString: dangerTag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -61,7 +61,7 @@ GameObject:
   - component: {fileID: 6229539402600402481}
   m_Layer: 6
   m_Name: Cube (1)
-  m_TagString: Untagged
+  m_TagString: dangerTag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -194,7 +194,7 @@ GameObject:
   - component: {fileID: 3224543977522896346}
   m_Layer: 6
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: dangerTag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

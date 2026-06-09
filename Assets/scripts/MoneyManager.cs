@@ -23,7 +23,7 @@ public class MoneyManager : MonoBehaviour
         money = PlayerPrefs.GetInt("money", 0);
         text.text = money.ToString();
         CreateCoins();
-        collectRangeSqr = (transform.localScale.x * transform.localScale.x) * 15f;
+        collectRangeSqr = transform.localScale.x * transform.localScale.x * 20f;
     }
 
     private void FixedUpdate()
@@ -50,7 +50,6 @@ public class MoneyManager : MonoBehaviour
         for (int i = 0;i < coinsInLevel;i++)
         {
             activeCoins.Add(Instantiate(coinPrefab, transform.position + new Vector3(0, i, 0), Quaternion.identity).transform);
-
         }
     }
     public void AddCoin()

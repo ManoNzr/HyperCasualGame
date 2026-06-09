@@ -60,9 +60,12 @@ public class BubbleController : MonoBehaviour
     }
 
 
-    void BounceThisWay(Vector2 dir)
+    void BounceThisWay(Vector2 dir, Vector2 normal)
     {
-        velocity += dir;
+
+        dir = dir - (2 * Vector2.Dot(dir, normal) * normal);
+        
+        velocity = dir * velocity.magnitude;
         if (velocity.magnitude > maxSpeed)
         {
             velocity = velocity.normalized * maxSpeed;
@@ -87,21 +90,18 @@ public class BubbleController : MonoBehaviour
     void PopBubble()
     {
         popticles.SetActive(true);
+        Debug.Log("POP");
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.layer == dangerLayer)
+        if (collision.gameObject.tag == "dangerTag")
         {
             PopBubble();
         }
-        else if (collision.gameObject.layer == bounceLayer)
+        else if (collision.gameObject.tag == "bounceTag")
         {
-            BounceThisWay(collision.contacts[0].point - new Vector2(transform.position.x, transform.position.y));
-        }
-        else if (collision.gameObject.layer == moneyLayer)
-        {
-            MoneyManager.instance.AddCoin();
+            BounceThisWay(velocity.normalized,(new Vector2(transform.position.x, transform.position.y) - collision.contacts[0].point).normalized);
         }
     }
 }
