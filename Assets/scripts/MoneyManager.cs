@@ -1,8 +1,9 @@
 using UnityEngine;
-
+using TMPro;
 public class MoneyManager : MonoBehaviour
 {
     public static MoneyManager instance;
+    [SerializeField] TMP_Text text;
     int money;
     private void Awake()
     {
@@ -18,6 +19,7 @@ public class MoneyManager : MonoBehaviour
         money++;
         PlayerPrefs.SetInt("money", money);
         PlayerPrefs.Save();
+        //text = money.ToString();
     }
     public bool SpendCoin(int amount)
     {
