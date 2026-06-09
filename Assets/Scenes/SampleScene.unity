@@ -12581,6 +12581,7 @@ GameObject:
   - component: {fileID: 1844446606}
   - component: {fileID: 1844446605}
   - component: {fileID: 1844446604}
+  - component: {fileID: 1844446607}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -12647,7 +12648,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 7d3d6b53c6c0f4b328e81c3c120c489d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -12677,6 +12678,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1844446602}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1844446607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1844446602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 567d862fc08e84fccb2a91690b9447a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentTransform: {fileID: 2011193862}
+  smoothSpeed: 10
+  maxDeformationVelocity: 5
 --- !u!1 &1930372129
 GameObject:
   m_ObjectHideFlags: 0
