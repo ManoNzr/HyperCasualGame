@@ -145,7 +145,7 @@ GameObject:
   - component: {fileID: 4308240389422241980}
   m_Layer: 6
   m_Name: Type1
-  m_TagString: bounceTag
+  m_TagString: dangerTag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -179,3 +179,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0
+  pivot: {fileID: 5508613875419425344}
