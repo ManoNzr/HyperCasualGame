@@ -131,9 +131,20 @@ public class ObstacleManager : MonoBehaviour
                 }
             }
         }
-        if(returnedObstacles >= limit) mustGenerate = false;
+        if(returnedObstacles > limit) mustGenerate = false;
     }
 
+    private void NextLevel()
+    {
+        if (!mustGenerate && returnedObstacles > limit)
+        {
+            ClearObstacles();   
+            GameManager.instance.ResetGame();
+            mustGenerate = true;
+            returnedObstacles = 0;
+            
+        }
+    }
 
     public void ClearObstacles()
     {

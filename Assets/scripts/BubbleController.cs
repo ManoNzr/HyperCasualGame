@@ -112,6 +112,12 @@ public class BubbleController : MonoBehaviour
 
         // jouer le son de pop
         popSound.Play();
+
+        GameManager.instance.BubbleBursted();
+    }
+    public void Respawn(Vector3 pos)
+    {
+        transform.position = pos;
     }
 
     // on gu�tte les collisions
