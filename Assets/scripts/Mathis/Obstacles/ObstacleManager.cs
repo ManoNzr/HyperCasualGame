@@ -9,14 +9,17 @@ using static UnityEngine.GraphicsBuffer;
 public class ObstacleManager : MonoBehaviour
 {
     [Header("Références")]
+    [SerializeField] MoneyManager moneyManager;
     [SerializeField] private GameObject player;          // Référence à la bulle
+    private BubbleController bubbleController;
     [SerializeField] private ObstacleData obstacleData; // Le ScriptableObject de configuration
     [SerializeField] private ObstaclePool obsPool;      // Référence au pool d'obstacles
+
 
     [Header("Paramètres de Génération")]
     [SerializeField] private float spawnAheadDistance = 15f;    // Distance au-dessus du joueur où spawner
     [SerializeField] private float inbetweenSpacing = 5f; // Distance verticale fixe entre chaque obstacle
-    [SerializeField] private bool hasStarted = false;
+   // [SerializeField] private bool hasStarted = false;
     [SerializeField] private bool mustGenerate = true;
     [SerializeField]private int returnedObstacles;
     [SerializeField] private int limit = 30;
@@ -32,7 +35,7 @@ public class ObstacleManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        bubbleController = player.GetComponent<BubbleController>();
         var bubbleBoundary = player.GetComponent<BubbleBoundary>();
         if (bubbleBoundary != null)
         {
@@ -43,13 +46,14 @@ public class ObstacleManager : MonoBehaviour
             playerBoundaryX = 6f; // Valeur par défaut
         }
 
-  
-        nextSpawnY = player.transform.position.y + 5f;
+        limit = 10;
+        nextSpawnY = player.transform.position.y + 35f;
+        mustGenerate = true;
 
     }
     private void Update()
     {
-        if (!hasStarted) return;
+        if (!bubbleController.FirstInput) return;
 
         SpawnHigher();
         ReturnObstacleToPool();
@@ -84,11 +88,13 @@ public class ObstacleManager : MonoBehaviour
             }
 
             obstacle.transform.position = new Vector3(spawnX, targetY, 0f);
+            moneyManager.CreateACoin(new Vector3(UnityEngine.Random.Range(-playerBoundaryX, playerBoundaryX), targetY + UnityEngine.Random.Range(5,15), 0f));
 
             ObstacleScript obstacleScript = obstacle.GetComponent<ObstacleScript>();
             if (obstacleScript != null) obstacleScript.Setup(obsType.dir,UnityEngine.Random.Range(30,60));
 
             activeObstacles.Add(obstacle);
+
         }
 
     }
