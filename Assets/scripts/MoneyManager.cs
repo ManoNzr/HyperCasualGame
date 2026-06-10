@@ -74,7 +74,7 @@ public class MoneyManager : MonoBehaviour
         coinCollectSound.Play();
     }
 
-    // d�pense le nombre de piece si c'est possible et retourne vrai sinon il retourne faux pour savoir si l'achat est accept� ou pas
+    // d�pense le nombre de piece si c'est possible et retourne vrai, sinon il retourne faux pour savoir si l'achat est accept� ou pas
     public bool SpendCoin(int amount)
     {
         if (money >= amount)
