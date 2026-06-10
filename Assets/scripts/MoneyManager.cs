@@ -11,6 +11,11 @@ public class MoneyManager : MonoBehaviour
     List<Transform> activeCoins = new List<Transform>();
     List<Transform> inactiveCoins = new List<Transform>();
     [SerializeField] int coinsInLevel;
+
+    [Space(50)]
+    [Header("SOUND FX")]
+    [SerializeField] AudioSource coinCollectSound;
+
     float collectRangeSqr;
 
     [SerializeField] Transform player;
@@ -32,7 +37,7 @@ public class MoneyManager : MonoBehaviour
         FindCollectableCoins();
     }
 
-    // cherche les pieces qui sont a portée et les rammasse
+    // cherche les pieces qui sont a portï¿½e et les rammasse
     void FindCollectableCoins()
     {
         for (int i = 0; i < activeCoins.Count; i++)
@@ -48,7 +53,7 @@ public class MoneyManager : MonoBehaviour
         }
     }
 
-    // crée des pieces ( pour tester )
+    // crï¿½e des pieces ( pour tester )
     void CreateCoins()
     {
         for (int i = 0;i < coinsInLevel;i++)
@@ -64,9 +69,12 @@ public class MoneyManager : MonoBehaviour
         PlayerPrefs.SetInt("money", money);
         PlayerPrefs.Save();
         text.text = money.ToString();
+
+        // jouer le son de collecte de piece
+        coinCollectSound.Play();
     }
 
-    // dépense le nombre de piece si c'est possible et retourne vrai sinon il retourne faux pour savoir si l'achat est accepté ou pas
+    // dï¿½pense le nombre de piece si c'est possible et retourne vrai sinon il retourne faux pour savoir si l'achat est acceptï¿½ ou pas
     public bool SpendCoin(int amount)
     {
         if (money >= amount)
