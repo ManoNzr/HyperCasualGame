@@ -2,6 +2,7 @@ using UnityEngine;
 public class BubbleController : MonoBehaviour
 {
     // JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI
+
     bool firstInput; // savoir si c'est la premi�re fois qu'on touche l'�cran
     [Header("Physics")]
     [SerializeField] float dragMultiplier;
@@ -27,6 +28,7 @@ public class BubbleController : MonoBehaviour
     [SerializeField] AudioSource popSound;
     [SerializeField] AudioSource windSound;
 
+    public bool FirstInput { get => firstInput; set => firstInput = value; }
 
     private void Awake()
     {
@@ -35,7 +37,7 @@ public class BubbleController : MonoBehaviour
 
     private void Update()
     {
-        // si il y aucun input
+        // si il y a aucun input
         if (JoyStick.instance.inputWind == Vector2.zero)
         {
             // on d�sactive l'effet visuel
@@ -44,10 +46,10 @@ public class BubbleController : MonoBehaviour
         else
         {
             // enlever le menu principal 
-            if (!firstInput)
+            if (!FirstInput)
             {
                 UImanager.Instance.StartGame();
-                firstInput = true;
+                FirstInput = true;
             }
         }
 

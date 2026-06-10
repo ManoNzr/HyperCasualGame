@@ -977,7 +977,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: {fileID: 573613825}
   coinPrefab: {fileID: 4623298917124496419, guid: be5b0507e5a244af3a8705585c086a1f, type: 3}
-  coinsInLevel: 35
+  coinsInLevel: 10
   coinCollectSound: {fileID: 1413047284}
   player: {fileID: 2011193862}
 --- !u!1 &377966227
@@ -8451,7 +8451,7 @@ ParticleSystem:
   m_GameObject: {fileID: 1565253866}
   serializedVersion: 8
   lengthInSec: 1
-  simulationSpeed: 11.56
+  simulationSpeed: 9.9
   stopAction: 1
   cullingMode: 0
   ringBufferMode: 0
@@ -8515,7 +8515,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 0
+  moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
@@ -8578,7 +8578,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 5
+      scalar: 6
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -8696,8 +8696,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.6
-      minScalar: 0.2
+      scalar: 0.5
+      minScalar: 0.3
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -9279,7 +9279,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 25
+      scalar: 20
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -13708,7 +13708,7 @@ Transform:
   m_GameObject: {fileID: 2011193860}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3, y: 2.117708, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 5.2, y: 5.2, z: 5.2}
   m_ConstrainProportionsScale: 1
   m_Children:
