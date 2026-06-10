@@ -2,7 +2,7 @@ using UnityEngine;
 public class BubbleController : MonoBehaviour
 {
     // JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI
-    bool firstInput; // savoir si c'est la première fois qu'on touche l'écran
+    bool firstInput; // savoir si c'est la premiï¿½re fois qu'on touche l'ï¿½cran
     [Header("Physics")]
     [SerializeField] float dragMultiplier;
     [SerializeField] float maxSpeed;
@@ -21,6 +21,13 @@ public class BubbleController : MonoBehaviour
 
     [Header("Camera")]
     [SerializeField] GameObject camera;
+
+    [Space(50)]
+    [Header("Sounds & FX")]
+    [SerializeField] AudioSource popSound;
+    [SerializeField] AudioSource windSound;
+
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -31,7 +38,7 @@ public class BubbleController : MonoBehaviour
         // si il y aucun input
         if (JoyStick.instance.inputWind == Vector2.zero)
         {
-            // on désactive l'effet visuel
+            // on dï¿½sactive l'effet visuel
             windBlow.SetActive(false);       
         }
         else
@@ -44,7 +51,7 @@ public class BubbleController : MonoBehaviour
             }
         }
 
-        // suive la bulle avec la caméra
+        // suive la bulle avec la camï¿½ra
         camera.transform.position = new Vector3(0,transform.position.y,-10f);
     }
     private void FixedUpdate()
@@ -53,7 +60,7 @@ public class BubbleController : MonoBehaviour
         AirDrag();
     }
 
-    // crée une force de vent dans cette direction
+    // crï¿½e une force de vent dans cette direction
     void BlowThisWay(Vector2 dir)
     {
         // on ajoute une force
@@ -89,20 +96,23 @@ public class BubbleController : MonoBehaviour
         rb.linearVelocity = velocity;
     }
 
-    // simule le frottement de l'air (même dans l'espace)
+    // simule le frottement de l'air (mï¿½me dans l'espace)
     void AirDrag()
     {
         velocity *= dragMultiplier;
     }        
 
-    // défaite
+    // dï¿½faite
     void PopBubble()
     {
         popticles.SetActive(true);
         Debug.Log("POP");
+
+        // jouer le son de pop
+        popSound.Play();
     }
 
-    // on guètte les collisions
+    // on guï¿½tte les collisions
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "dangerTag")
