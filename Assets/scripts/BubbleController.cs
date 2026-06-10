@@ -28,6 +28,7 @@ public class BubbleController : MonoBehaviour
     [SerializeField] AudioSource popSound;
     [SerializeField] AudioSource windSound;
 
+    public bool FirstInput { get => firstInput; set => firstInput = value; }
 
     private void Awake()
     {
@@ -45,10 +46,10 @@ public class BubbleController : MonoBehaviour
         else
         {
             // enlever le menu principal 
-            if (!firstInput)
+            if (!FirstInput)
             {
                 UImanager.Instance.StartGame();
-                firstInput = true;
+                FirstInput = true;
             }
         }
 
