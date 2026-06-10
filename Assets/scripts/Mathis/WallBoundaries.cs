@@ -1,8 +1,11 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class WallBoundaries : MonoBehaviour
 {
     [SerializeField] private GameObject player;
+    [SerializeField] private GameObject leftWall;
+    [SerializeField] private GameObject rightWall;
     private float playerBoundaryX;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -19,8 +22,9 @@ public class WallBoundaries : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        
+        leftWall.transform.position = new Vector3(playerBoundaryX + 25, player.transform.position.y, 0);
+        rightWall.transform.position = new Vector3(-playerBoundaryX - 25, player.transform.position.y, 0);
     }
 }
