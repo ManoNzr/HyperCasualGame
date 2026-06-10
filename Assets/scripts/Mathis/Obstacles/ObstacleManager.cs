@@ -19,13 +19,13 @@ public class ObstacleManager : MonoBehaviour
     [SerializeField] private bool hasStarted = false;
     [SerializeField] private bool mustGenerate = true;
     [SerializeField]private int returnedObstacles;
+    [SerializeField] private int limit = 30;
 
     private float playerBoundaryX;
     private float nextSpawnY;
 
 
     private List<GameObject> activeObstacles = new List<GameObject>();
-    private int limit = 30;
 
 
 

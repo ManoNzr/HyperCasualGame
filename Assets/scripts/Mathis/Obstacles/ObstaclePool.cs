@@ -82,13 +82,17 @@ public class ObstaclePool : MonoBehaviour
         switch (index)
         {
             case 0: // Type 0
-                return 20;  
+                return 10;  
             case 1: // Type 1
-                return 20;  
+                return 10;  
             case 2: // Type 2
-                return 11;  
+                return 10;  
             case 3: // Type 3
-                return 11;
+                return 10;
+            case 4: // Type 4
+                return 10;
+            case 5: // Type 4
+                return 10;
             default:
                 return 0;
         }
