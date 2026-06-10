@@ -4,6 +4,7 @@ using System.Collections; // Nécessaire pour les Coroutines
 
 public class UImanager : MonoBehaviour
 {
+    public static UImanager instance;
     [SerializeField] private GameObject volumeButton;
     [SerializeField] private GameObject MainMenuPanel;
     
@@ -18,6 +19,12 @@ public class UImanager : MonoBehaviour
     private Vector2 initialpos = Vector2.zero;
     private RectTransform mainMenuRect;
     private CanvasGroup labelCanvasGroup;
+
+    private void Awake()
+    {
+        if (instance == null) instance = this;
+        else { Destroy(gameObject); }
+    }
 
     private void Start()
     {
@@ -157,7 +164,7 @@ public class UImanager : MonoBehaviour
             yield return null;
         }
         deathPanelRect.anchoredPosition = endPos;
-
+        setPause();
     }
 
     private IEnumerator HideDeathPanelRoutine()
@@ -175,6 +182,7 @@ public class UImanager : MonoBehaviour
         }
         deathPanelRect.anchoredPosition = endPos;
         deathPanel.SetActive(false);
+
 
     }
 

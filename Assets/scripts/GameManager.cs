@@ -54,6 +54,7 @@ public class GameManager : MonoBehaviour
         ObstacleManager.Instance.NextSpawnY = player.position.y + 35f;
         ObstacleManager.Instance.ClearObstacles();
         bubbleBurstedMenu.SetActive(false);
+        UImanager.instance.setPause();
         
     }
 
@@ -74,6 +75,7 @@ public class GameManager : MonoBehaviour
     {
         player.gameObject.GetComponent<BubbleController>().Respawn(transform.position + new Vector3(0, -10, 0)); 
         bubbleBurstedMenu.SetActive(false);
+        UImanager.instance.setPause();
 
     }
 
