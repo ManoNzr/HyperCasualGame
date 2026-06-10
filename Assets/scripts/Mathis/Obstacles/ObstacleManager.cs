@@ -78,7 +78,9 @@ public class ObstacleManager : MonoBehaviour
             float spawnX = 0f;
             if (!obsType.isCentered)
             {
-                spawnX = UnityEngine.Random.Range(-playerBoundaryX, playerBoundaryX);
+                if(obsType.spawnSide <=0) spawnX = -playerBoundaryX;
+                spawnX = playerBoundaryX;
+                Debug.Log(spawnX);
             }
 
             obstacle.transform.position = new Vector3(spawnX, targetY, 0f);

@@ -24,7 +24,7 @@ public class WallBoundaries : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        leftWall.transform.position = new Vector3(playerBoundaryX + 25, player.transform.position.y, 0);
-        rightWall.transform.position = new Vector3(-playerBoundaryX - 25, player.transform.position.y, 0);
+        leftWall.transform.position = new Vector3(playerBoundaryX - 2, player.transform.position.y, 0);
+        rightWall.transform.position = new Vector3(-playerBoundaryX + 2, player.transform.position.y, 0);
     }
 }
