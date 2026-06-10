@@ -5,7 +5,7 @@ public abstract class ObstacleScript : MonoBehaviour
 {
     [SerializeField] protected float speed;
     protected string dir;
-    protected ObstaclePool obsPool;
+
 
     public void Setup(string direction, float vitesseComportement)
     {

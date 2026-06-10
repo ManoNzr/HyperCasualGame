@@ -11,6 +11,7 @@ public class ObstacleData : ScriptableObject
         public string name;
         public string dir;
         [Range(0f, 1f)] public float spawnRate;
+        public float spawnSide;
         public bool isCentered;
         public Color color;
         public GameObject prefab;

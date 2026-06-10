@@ -2,6 +2,7 @@ using UnityEngine;
 public class BubbleController : MonoBehaviour
 {
     // JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI
+
     bool firstInput; // savoir si c'est la premi�re fois qu'on touche l'�cran
     [Header("Physics")]
     [SerializeField] float dragMultiplier;
@@ -35,7 +36,7 @@ public class BubbleController : MonoBehaviour
 
     private void Update()
     {
-        // si il y aucun input
+        // si il y a aucun input
         if (JoyStick.instance.inputWind == Vector2.zero)
         {
             // on d�sactive l'effet visuel

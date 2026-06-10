@@ -28,7 +28,7 @@ public class MoneyManager : MonoBehaviour
     {
         money = PlayerPrefs.GetInt("money", 0);
         text.text = money.ToString();
-        CreateCoins();
+       // CreateCoins();
         collectRangeSqr = transform.localScale.x * transform.localScale.x * 20f;
     }
 
@@ -62,6 +62,11 @@ public class MoneyManager : MonoBehaviour
         }
     }
 
+    public void CreateACoin(Vector3 pos)
+    {
+        activeCoins.Add(Instantiate(coinPrefab, pos, Quaternion.identity).transform);
+    }
+
     // ajoute 1 piece au compteur de piece 
     public void AddCoin()
     {
@@ -74,7 +79,7 @@ public class MoneyManager : MonoBehaviour
         coinCollectSound.Play();
     }
 
-    // d�pense le nombre de piece si c'est possible et retourne vrai sinon il retourne faux pour savoir si l'achat est accept� ou pas
+    // d�pense le nombre de piece si c'est possible et retourne vrai, sinon il retourne faux pour savoir si l'achat est accept� ou pas
     public bool SpendCoin(int amount)
     {
         if (money >= amount)
