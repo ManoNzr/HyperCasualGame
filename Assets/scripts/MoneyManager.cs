@@ -28,7 +28,7 @@ public class MoneyManager : MonoBehaviour
     {
         money = PlayerPrefs.GetInt("money", 0);
         text.text = money.ToString();
-        CreateCoins();
+       // CreateCoins();
         collectRangeSqr = transform.localScale.x * transform.localScale.x * 20f;
     }
 
@@ -60,6 +60,11 @@ public class MoneyManager : MonoBehaviour
         {
             activeCoins.Add(Instantiate(coinPrefab, transform.position + new Vector3(0, i, 0), Quaternion.identity).transform);
         }
+    }
+
+    public void CreateACoin(Vector3 pos)
+    {
+        activeCoins.Add(Instantiate(coinPrefab, pos, Quaternion.identity).transform);
     }
 
     // ajoute 1 piece au compteur de piece 
