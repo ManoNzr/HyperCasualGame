@@ -157,6 +157,7 @@ public class UImanager : MonoBehaviour
             yield return null;
         }
         deathPanelRect.anchoredPosition = endPos;
+
     }
 
     private IEnumerator HideDeathPanelRoutine()
@@ -174,6 +175,7 @@ public class UImanager : MonoBehaviour
         }
         deathPanelRect.anchoredPosition = endPos;
         deathPanel.SetActive(false);
+
     }
 
     private void moveDeathPanelOffScreen()

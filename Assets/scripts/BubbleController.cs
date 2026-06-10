@@ -114,18 +114,26 @@ public class BubbleController : MonoBehaviour
         popSound.Play();
 
         GameManager.instance.BubbleBursted();
+        UImanager.Instance.ShowDeathPanel();
     }
     public void Respawn(Vector3 pos)
     {
         transform.position = pos;
     }
 
+
+    public void LevelCompleted()
+    {
+        GameManager.instance.IncreaseCurrentLevel();
+
+    }
     // on gu�tte les collisions
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "dangerTag")
         {
             PopBubble();
+            BounceThisWay(velocity.normalized * 5f, (new Vector2(transform.position.x, transform.position.y) - collision.contacts[0].point).normalized);
         }
         else if (collision.gameObject.tag == "bounceTag")
         {

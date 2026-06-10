@@ -8,6 +8,9 @@ using static UnityEngine.GraphicsBuffer;
 
 public class ObstacleManager : MonoBehaviour
 {
+
+    public static ObstacleManager Instance;    
+
     [Header("Références")]
     [SerializeField] MoneyManager moneyManager;
     [SerializeField] private GameObject player;          // Référence à la bulle
@@ -28,8 +31,17 @@ public class ObstacleManager : MonoBehaviour
     private float nextSpawnY;
 
 
+
+
     private List<GameObject> activeObstacles = new List<GameObject>();
 
+    public float NextSpawnY { get => nextSpawnY; set => nextSpawnY = value; }
+
+    private void Awake()
+    {
+        if (Instance == null) Instance = this;
+        else { Destroy(gameObject); }
+    }
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -47,7 +59,7 @@ public class ObstacleManager : MonoBehaviour
         }
 
         limit = 10;
-        nextSpawnY = player.transform.position.y + 35f;
+        NextSpawnY = player.transform.position.y + 35f;
         mustGenerate = true;
 
     }
@@ -57,15 +69,19 @@ public class ObstacleManager : MonoBehaviour
 
         SpawnHigher();
         ReturnObstacleToPool();
-
+        if (!mustGenerate && returnedObstacles > limit)
+        {
+            bubbleController.LevelCompleted();
+            NextLevel();          
+        }
     }
 
     private void SpawnHigher()
     {
-        if(player.transform.position.y +  spawnAheadDistance >= nextSpawnY && mustGenerate)
+        if(player.transform.position.y +  spawnAheadDistance >= NextSpawnY && mustGenerate)
         {
-            SpawnObstacle(nextSpawnY);
-            nextSpawnY += inbetweenSpacing;
+            SpawnObstacle(NextSpawnY);
+            NextSpawnY += inbetweenSpacing;
         }
 
     }
@@ -136,14 +152,12 @@ public class ObstacleManager : MonoBehaviour
 
     private void NextLevel()
     {
-        if (!mustGenerate && returnedObstacles > limit)
-        {
-            ClearObstacles();   
-            GameManager.instance.ResetGame();
-            mustGenerate = true;
-            returnedObstacles = 0;
-            
-        }
+        ClearObstacles();   
+        GameManager.instance.GoToNextLevel();
+        mustGenerate = true;
+        NextSpawnY = player.transform.position.y + 35f;
+        returnedObstacles = 0;       
+        
     }
 
     public void ClearObstacles()
