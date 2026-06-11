@@ -1,10 +1,9 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using TMPro;
-using Unity.AppUI.UI;
 
 public class GameManager : MonoBehaviour
 {
+    //  JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI
     public static GameManager instance;
     [SerializeField] int currentLevel;
     [SerializeField] int bestLevel;
@@ -12,9 +11,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] GameObject bubbleBurstedMenu;
 
-    //[SerializeField] TextMeshProUGUI levelUI;
     [SerializeField] TMP_Text levelText;
-
+    [SerializeField] TMP_Text bestLevelText;
     private void Awake()
     {
         if (instance == null) instance = this;
@@ -26,6 +24,7 @@ public class GameManager : MonoBehaviour
         currentLevel = PlayerPrefs.GetInt("level", 0);
         bestLevel = PlayerPrefs.GetInt("bestLevel", 0);
         UpdateLevelUI();
+        UpdateBestLevelUI();
     }
 
     public void IncreaseCurrentLevel()
@@ -45,6 +44,11 @@ public class GameManager : MonoBehaviour
     private void UpdateLevelUI()
     {
         levelText.text = currentLevel.ToString();
+    }
+
+    private void UpdateBestLevelUI()
+    {
+        bestLevelText.text = bestLevel.ToString();
     }
 
     public void ResetGame()
@@ -84,6 +88,7 @@ public class GameManager : MonoBehaviour
         if (currentLevel > PlayerPrefs.GetInt("bestLevel", 0))
         {
             PlayerPrefs.SetInt("bestLevel", currentLevel);
+            UpdateBestLevelUI();
         }
         currentLevel = 0;
         PlayerPrefs.SetInt("level", currentLevel);
