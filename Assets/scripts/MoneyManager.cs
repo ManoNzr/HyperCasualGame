@@ -10,7 +10,7 @@ public class MoneyManager : MonoBehaviour
     [SerializeField] GameObject coinPrefab;
     List<Transform> activeCoins = new List<Transform>();
     List<Transform> inactiveCoins = new List<Transform>();
-    [SerializeField] int coinsInLevel;
+    //[SerializeField] int coinsInLevel;
 
     [Space(50)]
     [Header("SOUND FX")]
@@ -54,14 +54,16 @@ public class MoneyManager : MonoBehaviour
     }
 
     // cr�e des pieces ( pour tester )
-    void CreateCoins()
+    /*void CreateCoins()
     {
         for (int i = 0;i < coinsInLevel;i++)
         {
             activeCoins.Add(Instantiate(coinPrefab, transform.position + new Vector3(0, i, 0), Quaternion.identity).transform);
         }
-    }
+    }*/
 
+
+    // ajouter une piece au niveau
     public void CreateACoin(Vector3 pos)
     {
         activeCoins.Add(Instantiate(coinPrefab, pos, Quaternion.identity).transform);

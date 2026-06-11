@@ -130,12 +130,12 @@ public class BubbleController : MonoBehaviour
     // on gu�tte les collisions
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "dangerTag")
+        if (collision.gameObject.tag == "dangerTag") // defaite + rebond
         {
             PopBubble();
             BounceThisWay(velocity.normalized * 5f, (new Vector2(transform.position.x, transform.position.y) - collision.contacts[0].point).normalized);
         }
-        else if (collision.gameObject.tag == "bounceTag")
+        else if (collision.gameObject.tag == "bounceTag") // on rebondit
         {
             BounceThisWay(velocity.normalized,(new Vector2(transform.position.x, transform.position.y) - collision.contacts[0].point).normalized);
         }
