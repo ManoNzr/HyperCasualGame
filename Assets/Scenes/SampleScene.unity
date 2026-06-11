@@ -1139,7 +1139,7 @@ MonoBehaviour:
   player: {fileID: 2011193862}
   bubbleBurstedMenu: {fileID: 816983625}
   levelText: {fileID: 1084349170}
-  bestLevelText: {fileID: 0}
+  bestLevelText: {fileID: 1084349170}
 --- !u!1 &377966227
 GameObject:
   m_ObjectHideFlags: 0
