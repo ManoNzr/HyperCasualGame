@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour
 
     private void UpdateBestLevelUI()
     {
-        bestLevelText.text = bestLevel.ToString();
+        bestLevelText.text = "BEST " + bestLevel.ToString();
     }
 
     public void ResetGame()
