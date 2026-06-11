@@ -57,6 +57,7 @@ public class GameManager : MonoBehaviour
         player.position = Vector3.zero;
         ObstacleManager.Instance.NextSpawnY = player.position.y + 35f;
         ObstacleManager.Instance.ClearObstacles();
+        MoneyManager.instance.ClearCoinsInLevel();
         bubbleBurstedMenu.SetActive(false);
         UImanager.instance.setPause();
         

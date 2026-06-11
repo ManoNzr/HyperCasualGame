@@ -154,6 +154,7 @@ public class ObstacleManager : MonoBehaviour
     {
         ClearObstacles();   
         GameManager.instance.GoToNextLevel();
+        MoneyManager.instance.ClearCoinsInLevel();
         mustGenerate = true;
         NextSpawnY = player.transform.position.y + 35f;
         returnedObstacles = 0;       
