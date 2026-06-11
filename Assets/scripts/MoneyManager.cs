@@ -36,7 +36,23 @@ public class MoneyManager : MonoBehaviour
     {
         FindCollectableCoins();
     }
-
+    public void ClearCoinsInLevel()
+    {
+        for (int i = 0; i < activeCoins.Count; ++i)
+        {
+            GameObject currentCoin = activeCoins[i].gameObject;
+            activeCoins[i] = null;
+            Destroy(currentCoin);
+        }
+        activeCoins.Clear();
+        for (int i = 0; i < inactiveCoins.Count; ++i)
+        {
+            GameObject currentCoin = inactiveCoins[i].gameObject;
+            inactiveCoins[i] = null;
+            Destroy(currentCoin);
+        }
+        inactiveCoins.Clear();
+    }
     // cherche les pieces qui sont a port�e et les rammasse
     void FindCollectableCoins()
     {
