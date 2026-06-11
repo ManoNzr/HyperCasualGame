@@ -1,4 +1,6 @@
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 public class BubbleController : MonoBehaviour
 {
     // JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI
@@ -27,6 +29,7 @@ public class BubbleController : MonoBehaviour
     [Header("Sounds & FX")]
     [SerializeField] AudioSource popSound;
     [SerializeField] AudioSource windSound;
+    [SerializeField] Transform UIPanael;
 
     public bool FirstInput { get => firstInput; set => firstInput = value; }
 
@@ -58,6 +61,7 @@ public class BubbleController : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        if (UIPanael.position.x < 20) return;
         BlowThisWay(JoyStick.instance.inputWind * windForce);
         AirDrag();
     }
@@ -130,12 +134,13 @@ public class BubbleController : MonoBehaviour
     // on gu�tte les collisions
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "dangerTag")
+        if (UIPanael.position.x < 20) return;
+        if (collision.gameObject.tag == "dangerTag") // defaite + rebond
         {
             PopBubble();
             BounceThisWay(velocity.normalized * 5f, (new Vector2(transform.position.x, transform.position.y) - collision.contacts[0].point).normalized);
         }
-        else if (collision.gameObject.tag == "bounceTag")
+        else if (collision.gameObject.tag == "bounceTag") // on rebondit
         {
             BounceThisWay(velocity.normalized,(new Vector2(transform.position.x, transform.position.y) - collision.contacts[0].point).normalized);
         }

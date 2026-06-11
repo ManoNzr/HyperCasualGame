@@ -94,7 +94,7 @@ public class UImanager : MonoBehaviour
         while (elapsedTime < animationDuration)
         {
             labelCanvasGroup.alpha = Mathf.Lerp(1f, 0f, elapsedTime / animationDuration);
-            elapsedTime += Time.deltaTime;
+            elapsedTime += Time.unscaledDeltaTime;
             yield return null;
         }
         labelCanvasGroup.alpha = 0f;
@@ -105,7 +105,7 @@ public class UImanager : MonoBehaviour
         while (elapsedTime < animationDuration)
         {
             mainMenuRect.anchoredPosition = Vector2.Lerp(initialpos, targetPos, elapsedTime / animationDuration);
-            elapsedTime += Time.deltaTime;
+            elapsedTime += Time.unscaledDeltaTime; 
             yield return null;
         }
         mainMenuRect.anchoredPosition = targetPos;
@@ -121,7 +121,7 @@ public class UImanager : MonoBehaviour
         while (elapsedTime < animationDuration)
         {
             mainMenuRect.anchoredPosition = Vector2.Lerp(currentPos, initialpos, elapsedTime / animationDuration);
-            elapsedTime += Time.deltaTime;
+            elapsedTime += Time.unscaledDeltaTime;
             yield return null;
         }
         mainMenuRect.anchoredPosition = initialpos;
@@ -130,7 +130,7 @@ public class UImanager : MonoBehaviour
         while (elapsedTime < animationDuration)
         {
             labelCanvasGroup.alpha = Mathf.Lerp(0f, 1f, elapsedTime / animationDuration);
-            elapsedTime += Time.deltaTime;
+            elapsedTime += Time.unscaledDeltaTime;
             yield return null;
         }
         labelCanvasGroup.alpha = 1f;
@@ -160,7 +160,7 @@ public class UImanager : MonoBehaviour
         while (elapsedTime < animationDuration)
         {
             deathPanelRect.anchoredPosition = Vector2.Lerp(startPos, endPos, elapsedTime / animationDuration);
-            elapsedTime += Time.deltaTime;
+            elapsedTime += Time.unscaledDeltaTime;
             yield return null;
         }
         deathPanelRect.anchoredPosition = endPos;
@@ -177,7 +177,7 @@ public class UImanager : MonoBehaviour
         while (elapsedTime < animationDuration)
         {
             deathPanelRect.anchoredPosition = Vector2.Lerp(startPos, endPos, elapsedTime / animationDuration);
-            elapsedTime += Time.deltaTime;
+            elapsedTime += Time.unscaledDeltaTime;
             yield return null;
         }
         deathPanelRect.anchoredPosition = endPos;

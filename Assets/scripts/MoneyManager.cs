@@ -10,7 +10,7 @@ public class MoneyManager : MonoBehaviour
     [SerializeField] GameObject coinPrefab;
     List<Transform> activeCoins = new List<Transform>();
     List<Transform> inactiveCoins = new List<Transform>();
-    [SerializeField] int coinsInLevel;
+    //[SerializeField] int coinsInLevel;
 
     [Space(50)]
     [Header("SOUND FX")]
@@ -36,7 +36,23 @@ public class MoneyManager : MonoBehaviour
     {
         FindCollectableCoins();
     }
-
+    public void ClearCoinsInLevel()
+    {
+        for (int i = 0; i < activeCoins.Count; ++i)
+        {
+            GameObject currentCoin = activeCoins[i].gameObject;
+            activeCoins[i] = null;
+            Destroy(currentCoin);
+        }
+        activeCoins.Clear();
+        for (int i = 0; i < inactiveCoins.Count; ++i)
+        {
+            GameObject currentCoin = inactiveCoins[i].gameObject;
+            inactiveCoins[i] = null;
+            Destroy(currentCoin);
+        }
+        inactiveCoins.Clear();
+    }
     // cherche les pieces qui sont a port�e et les rammasse
     void FindCollectableCoins()
     {
@@ -54,14 +70,16 @@ public class MoneyManager : MonoBehaviour
     }
 
     // cr�e des pieces ( pour tester )
-    void CreateCoins()
+    /*void CreateCoins()
     {
         for (int i = 0;i < coinsInLevel;i++)
         {
             activeCoins.Add(Instantiate(coinPrefab, transform.position + new Vector3(0, i, 0), Quaternion.identity).transform);
         }
-    }
+    }*/
 
+
+    // ajouter une piece au niveau
     public void CreateACoin(Vector3 pos)
     {
         activeCoins.Add(Instantiate(coinPrefab, pos, Quaternion.identity).transform);
