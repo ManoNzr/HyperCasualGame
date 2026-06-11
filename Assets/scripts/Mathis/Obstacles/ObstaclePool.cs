@@ -91,7 +91,9 @@ public class ObstaclePool : MonoBehaviour
                 return 10;
             case 4: // Type 4
                 return 10;
-            case 5: // Type 4
+            case 5: // Type 5
+                return 10;
+            case 6: // Type 6
                 return 10;
             default:
                 return 0;

@@ -35,8 +35,8 @@ MonoBehaviour:
     color: {r: 0, g: 0, b: 0, a: 0}
     prefab: {fileID: 5508613875419425344, guid: bc347ac615c0bcd47b4e30fd2d531025, type: 3}
   - name: Type 2
-    dir: hor
-    spawnRate: 0.4
+    dir: round
+    spawnRate: 0.1
     spawnSide: 0
     isCentered: 1
     color: {r: 0, g: 0, b: 0, a: 0}
@@ -55,3 +55,10 @@ MonoBehaviour:
     isCentered: 1
     color: {r: 0, g: 0, b: 0, a: 0}
     prefab: {fileID: 5005471208833338903, guid: 30b5b81d01221264ba64950f24618209, type: 3}
+  - name: Type 5
+    dir: round
+    spawnRate: 0.4
+    spawnSide: 0
+    isCentered: 1
+    color: {r: 0, g: 0, b: 0, a: 0}
+    prefab: {fileID: 5005471208833338903, guid: e47fb84b72912ab49b0ae3346db69cf0, type: 3}
