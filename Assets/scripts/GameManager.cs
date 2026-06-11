@@ -1,5 +1,6 @@
-using UnityEngine;
+using System.Collections;
 using TMPro;
+using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,18 +14,22 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] TMP_Text levelText;
     [SerializeField] TMP_Text bestLevelText;
+    [SerializeField] TMP_Text warningText;
+    private BubbleController bubbleController;
+
     private void Awake()
     {
         if (instance == null) instance = this;
         else { Destroy(gameObject); }
     }
-    
+
     void Start()
     {
         currentLevel = PlayerPrefs.GetInt("level", 0);
         bestLevel = PlayerPrefs.GetInt("bestLevel", 0);
         UpdateLevelUI();
         UpdateBestLevelUI();
+        bubbleController = FindFirstObjectByType<BubbleController>().GetComponent<BubbleController>();
     }
 
     public void IncreaseCurrentLevel()
@@ -62,7 +67,7 @@ public class GameManager : MonoBehaviour
         UImanager.instance.setPause();
         UpdateLevelUI();
         UpdateBestLevelUI();
-
+        bubbleController.AsHit = false;
     }
 
     public void TryBuyLife()
@@ -71,6 +76,20 @@ public class GameManager : MonoBehaviour
         {
             ContinueGame();
         }
+        else
+        {
+            StartCoroutine(WarningMessage());
+        }
+    }
+
+    private IEnumerator WarningMessage()
+    {
+        warningText.gameObject.SetActive(true);
+        warningText.text = "Not Enough Money\n" + "Press Restart";
+        yield return new WaitForSecondsRealtime(2);
+        warningText.text = null;
+        warningText.gameObject.SetActive(false);
+        yield return null;
     }
 
     public void GoToNextLevel()
@@ -80,7 +99,7 @@ public class GameManager : MonoBehaviour
 
     public void ContinueGame()
     {
-        player.gameObject.GetComponent<BubbleController>().Respawn(transform.position + new Vector3(0, -10, 0)); 
+        player.gameObject.GetComponent<BubbleController>().Respawn(transform.position + new Vector3(0, -10, 0));
         bubbleBurstedMenu.SetActive(false);
         UImanager.instance.setPause();
         UpdateLevelUI();

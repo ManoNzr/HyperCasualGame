@@ -1,6 +1,4 @@
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements;
 public class BubbleController : MonoBehaviour
 {
     // JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI
@@ -31,6 +29,20 @@ public class BubbleController : MonoBehaviour
     [SerializeField] AudioSource windSound;
     [SerializeField] Transform UIPanael;
 
+    private bool asHit = false;
+    public bool AsHit
+    {
+        get { return asHit; }
+        set { asHit = value; }
+    }
+
+    private bool isDead = false;
+    public bool IsDead
+    {
+        get { return isDead; }
+        set { isDead = value; }
+    }
+
     public bool FirstInput { get => firstInput; set => firstInput = value; }
 
     private void Awake()
@@ -44,7 +56,7 @@ public class BubbleController : MonoBehaviour
         if (JoyStick.instance.inputWind == Vector2.zero)
         {
             // on d�sactive l'effet visuel
-            windBlow.SetActive(false);       
+            windBlow.SetActive(false);
         }
         else
         {
@@ -57,7 +69,7 @@ public class BubbleController : MonoBehaviour
         }
 
         // suive la bulle avec la cam�ra
-        camera.transform.position = new Vector3(0,transform.position.y,-10f);
+        camera.transform.position = new Vector3(0, transform.position.y, -10f);
     }
     private void FixedUpdate()
     {
@@ -80,7 +92,7 @@ public class BubbleController : MonoBehaviour
 
         // on applique la velocity
         rb.linearVelocity = velocity;
-        
+
         // on oriente l'effet visuel
         windBlow.SetActive(true);
         windBlow.transform.right = dir;
@@ -91,7 +103,7 @@ public class BubbleController : MonoBehaviour
     {
         // on trouve la directipon du rebond
         dir = dir - (2 * Vector2.Dot(dir, normal) * normal);
-        
+
         velocity = dir * velocity.magnitude;
 
         if (velocity.magnitude > maxSpeed)
@@ -106,13 +118,15 @@ public class BubbleController : MonoBehaviour
     void AirDrag()
     {
         velocity *= dragMultiplier;
-    }        
+    }
 
     // d�faite
     void PopBubble()
     {
         popticles.SetActive(true);
         Debug.Log("POP");
+
+        isDead = true;
 
         // jouer le son de pop
         popSound.Play();
@@ -134,15 +148,17 @@ public class BubbleController : MonoBehaviour
     // on gu�tte les collisions
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (asHit == true) return;
         if (UIPanael.position.x < 20) return;
         if (collision.gameObject.tag == "dangerTag") // defaite + rebond
         {
             PopBubble();
             BounceThisWay(velocity.normalized * 5f, (new Vector2(transform.position.x, transform.position.y) - collision.contacts[0].point).normalized);
+            asHit = true;
         }
         else if (collision.gameObject.tag == "bounceTag") // on rebondit
         {
-            BounceThisWay(velocity.normalized,(new Vector2(transform.position.x, transform.position.y) - collision.contacts[0].point).normalized);
+            BounceThisWay(velocity.normalized, (new Vector2(transform.position.x, transform.position.y) - collision.contacts[0].point).normalized);
         }
     }
 }
