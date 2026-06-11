@@ -69,7 +69,7 @@ public class ObstacleManager : MonoBehaviour
 
         SpawnHigher();
         ReturnObstacleToPool();
-        if (!mustGenerate && returnedObstacles > limit)
+        if (!mustGenerate && returnedObstacles >= limit)
         {
             bubbleController.LevelCompleted();
             NextLevel();          
@@ -147,7 +147,7 @@ public class ObstacleManager : MonoBehaviour
                 }
             }
         }
-        if(returnedObstacles > limit) mustGenerate = false;
+        if(returnedObstacles > limit-2) mustGenerate = false;
     }
 
     private void NextLevel()
