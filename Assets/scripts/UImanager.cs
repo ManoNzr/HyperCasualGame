@@ -154,7 +154,7 @@ public class UImanager : MonoBehaviour
         deathPanel.SetActive(true);
         RectTransform deathPanelRect = deathPanel.GetComponent<RectTransform>();
         Vector2 startPos = new Vector2(Screen.width + slideDistance, 0);
-        Vector2 endPos = new Vector2(Screen.width / 2, 0);
+        Vector2 endPos = Vector2.zero;
         float elapsedTime = 0f;
 
         while (elapsedTime < animationDuration)
@@ -170,7 +170,7 @@ public class UImanager : MonoBehaviour
     private IEnumerator HideDeathPanelRoutine()
     {
         RectTransform deathPanelRect = deathPanel.GetComponent<RectTransform>();
-        Vector2 startPos = deathPanelRect.anchoredPosition;
+        Vector2 startPos = Vector2.zero;
         Vector2 endPos = new Vector2(Screen.width + slideDistance, 0);
         float elapsedTime = 0f;
 

@@ -41,14 +41,14 @@ public class GameManager : MonoBehaviour
         bubbleBurstedMenu.SetActive(true);
     }
 
-    private void UpdateLevelUI()
+    public void UpdateLevelUI()
     {
         levelText.text = currentLevel.ToString();
     }
 
-    private void UpdateBestLevelUI()
+    public void UpdateBestLevelUI()
     {
-        bestLevelText.text = bestLevel.ToString();
+        bestLevelText.text = "BEST " + bestLevel.ToString();
     }
 
     public void ResetGame()
