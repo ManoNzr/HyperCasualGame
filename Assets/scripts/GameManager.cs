@@ -60,7 +60,9 @@ public class GameManager : MonoBehaviour
         MoneyManager.instance.ClearCoinsInLevel();
         bubbleBurstedMenu.SetActive(false);
         UImanager.instance.setPause();
-        
+        UpdateLevelUI();
+        UpdateBestLevelUI();
+
     }
 
     public void TryBuyLife()
@@ -81,6 +83,8 @@ public class GameManager : MonoBehaviour
         player.gameObject.GetComponent<BubbleController>().Respawn(transform.position + new Vector3(0, -10, 0)); 
         bubbleBurstedMenu.SetActive(false);
         UImanager.instance.setPause();
+        UpdateLevelUI();
+        UpdateBestLevelUI();
 
     }
 
@@ -95,5 +99,6 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetInt("level", currentLevel);
         PlayerPrefs.Save();
         UpdateLevelUI();
+        UpdateBestLevelUI();
     }
 }
