@@ -395,11 +395,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-<<<<<<< Updated upstream
-  m_text: Continu mais 100 pieces de mes couilles
-=======
   m_text: "Continu For \n10 Gold"
->>>>>>> Stashed changes
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1144,12 +1140,8 @@ MonoBehaviour:
   bubbleBurstedMenu: {fileID: 816983625}
   levelText: {fileID: 567974760}
   bestLevelText: {fileID: 1084349170}
-<<<<<<< Updated upstream
-  warningText: {fileID: 0}
-=======
   warningText: {fileID: 1161867289}
   coinsPrice: 10
->>>>>>> Stashed changes
 --- !u!1 &377966227
 GameObject:
   m_ObjectHideFlags: 0
@@ -14547,8 +14539,6 @@ Transform:
   - {fileID: 1413047283}
   m_Father: {fileID: 2011193862}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-<<<<<<< Updated upstream
-=======
 --- !u!1 &1655591900
 GameObject:
   m_ObjectHideFlags: 0
@@ -14596,7 +14586,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
->>>>>>> Stashed changes
 --- !u!1 &1789355006
 GameObject:
   m_ObjectHideFlags: 0
@@ -15781,9 +15770,5 @@ SceneRoots:
   - {fileID: 1219492593}
   - {fileID: 400378803}
   - {fileID: 519604237}
-<<<<<<< Updated upstream
-  - {fileID: 886636505}
-=======
   - {fileID: 1655591902}
   - {fileID: 1396931519}
->>>>>>> Stashed changes
