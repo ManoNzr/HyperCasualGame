@@ -149,7 +149,7 @@ public class BubbleController : MonoBehaviour
     {
         if (asHit == true) return;
         if (UIPanael.position.x < 20) return;
-        if (collision.gameObject.tag == "dangerTag") // defaite + rebond
+        if (collision.gameObject.tag == "dangerTag" || collision.gameObject.tag == "mort") // defaite + rebond
         {
             PopBubble();
             BounceThisWay(velocity.normalized * 5f, (new Vector2(transform.position.x, transform.position.y) - collision.contacts[0].point).normalized);

@@ -1140,7 +1140,7 @@ MonoBehaviour:
   bubbleBurstedMenu: {fileID: 816983625}
   levelText: {fileID: 567974760}
   bestLevelText: {fileID: 1084349170}
-  warningText: {fileID: 1161867289}
+  warningText: {fileID: 0}
   coinsPrice: 10
 --- !u!1 &377966227
 GameObject:
@@ -2605,7 +2605,7 @@ GameObject:
   - component: {fileID: 886636502}
   m_Layer: 6
   m_Name: Pas_demi_tout
-  m_TagString: dangerTag
+  m_TagString: mort
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14974,7 +14974,7 @@ GameObject:
   - component: {fileID: 2011193863}
   m_Layer: 0
   m_Name: Bubble
-  m_TagString: Untagged
+  m_TagString: Bulle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15772,3 +15772,4 @@ SceneRoots:
   - {fileID: 519604237}
   - {fileID: 1655591902}
   - {fileID: 1396931519}
+  - {fileID: 886636505}

@@ -62,6 +62,7 @@ public class GameManager : MonoBehaviour
 
     public void ResetGame()
     {
+        SceneManager.LoadSceneAsync(0);
         ResetScore();
         player.position = Vector3.zero;
         ObstacleManager.Instance.NextSpawnY = player.position.y + 35f;
@@ -72,7 +73,6 @@ public class GameManager : MonoBehaviour
         UpdateLevelUI();
         UpdateBestLevelUI();
         bubbleController.AsHit = false;
-        SceneManager.LoadSceneAsync(0);
     }
 
     public void TryBuyLife()
