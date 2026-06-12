@@ -1,6 +1,6 @@
-using UnityEngine;
-using TMPro;
 using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
 public class MoneyManager : MonoBehaviour
 {
     //  JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI JAHMI
@@ -28,7 +28,7 @@ public class MoneyManager : MonoBehaviour
     {
         money = PlayerPrefs.GetInt("money", 0);
         text.text = money.ToString();
-       // CreateCoins();
+        // CreateCoins();
         collectRangeSqr = transform.localScale.x * transform.localScale.x * 20f;
     }
 
@@ -60,11 +60,18 @@ public class MoneyManager : MonoBehaviour
         {
             if ((player.position - activeCoins[i].position).sqrMagnitude < collectRangeSqr)
             {
-                Transform coin = activeCoins[i];
-                activeCoins.RemoveAt(i);
-                inactiveCoins.Add(coin);
-                coin.gameObject.SetActive(false);
-                AddCoin();
+                if (activeCoins[i] != null)
+                {
+                    Transform coin = activeCoins[i];
+                    activeCoins.RemoveAt(i);
+                    inactiveCoins.Add(coin);
+                    coin.gameObject.SetActive(false);
+                    AddCoin();
+                }
+                else
+                {
+                    return;
+                }
             }
         }
     }

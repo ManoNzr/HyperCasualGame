@@ -8,6 +8,7 @@ public class SpawnMissile : MonoBehaviour
     private float spawnXPosition;
     private BubbleController bubbleController;
 
+    [SerializeField] private GameObject player;
     void Awake()
     {
         bubbleController = Object.FindFirstObjectByType<BubbleController>();
@@ -41,7 +42,7 @@ public class SpawnMissile : MonoBehaviour
         if (!bubbleController.IsDead && !bubbleController.AsHit)
         {
             float randomX = Random.Range(-spawnXPosition, spawnXPosition);
-            Vector3 spawnPosition = new Vector3(randomX, transform.position.y, 0f);
+            Vector3 spawnPosition = new Vector3(randomX, transform.position.y + player.transform.position.y, 0f);
 
             Instantiate(missilePrefab, spawnPosition, Quaternion.identity);
         }

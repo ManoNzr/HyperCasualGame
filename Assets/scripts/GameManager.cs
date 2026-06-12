@@ -1,6 +1,7 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -16,6 +17,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] TMP_Text bestLevelText;
     [SerializeField] TMP_Text warningText;
     private BubbleController bubbleController;
+
+    [SerializeField] private int coinsPrice;
 
     private void Awake()
     {
@@ -38,6 +41,7 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetInt("level", currentLevel);
         PlayerPrefs.Save();
         UpdateLevelUI();
+        SceneManager.LoadSceneAsync(0);
         Debug.Log(currentLevel);
     }
 
@@ -68,11 +72,12 @@ public class GameManager : MonoBehaviour
         UpdateLevelUI();
         UpdateBestLevelUI();
         bubbleController.AsHit = false;
+        SceneManager.LoadSceneAsync(0);
     }
 
     public void TryBuyLife()
     {
-        if (MoneyManager.instance.SpendCoin(100))
+        if (MoneyManager.instance.SpendCoin(coinsPrice))
         {
             ContinueGame();
         }
@@ -104,7 +109,7 @@ public class GameManager : MonoBehaviour
         UImanager.instance.setPause();
         UpdateLevelUI();
         UpdateBestLevelUI();
-
+        SceneManager.LoadSceneAsync(0);
     }
 
     public void ResetScore()

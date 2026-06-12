@@ -121,7 +121,7 @@ public class BubbleController : MonoBehaviour
     }
 
     // d�faite
-    void PopBubble()
+    public void PopBubble()
     {
         popticles.SetActive(true);
         Debug.Log("POP");
@@ -143,7 +143,6 @@ public class BubbleController : MonoBehaviour
     public void LevelCompleted()
     {
         GameManager.instance.IncreaseCurrentLevel();
-
     }
     // on gu�tte les collisions
     private void OnCollisionEnter2D(Collision2D collision)
